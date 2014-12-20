@@ -22,4 +22,3 @@ ID;Date;Operations Added;Operations Deleted;Operations Updated;Data Structures A
 18;4/11/2008;2;1;1;9;2;3
 19;1/12/2011;3;2;5;20;5;13
 20;29/3/2012;3;0;7;14;0;17
-
