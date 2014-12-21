@@ -12,8 +12,6 @@ import java.util.ArrayList;
  */
 
 public class HistoryParser {
-    final int NUM_OF_FIELDS = 8;
-    
     // positions of fields so we don't have to remember the format of the file
     final int ID = 0;
     final int DATE = 1;
@@ -38,7 +36,10 @@ public class HistoryParser {
     private int dataStructuresDel;
     private int dataStructuresUpd;
 
-
+    public HistoryParser (Path file) {
+	historyFile = file;
+	readFile ();
+    }
 
     public ArrayList <Version> readFile () {
 	ArrayList <Version> versions =  new ArrayList <Version> ();
@@ -49,7 +50,7 @@ public class HistoryParser {
 	    
 	    String line;
 	    line = reader.readLine ();
-	    String [] fields = line.split (";");
+	    String[] fields = line.split (";");
 	    initOperationsNum = Integer.parseInt (fields[1] );
 	    
 	    line = reader.readLine ();
@@ -72,21 +73,18 @@ public class HistoryParser {
 	    	dataStructuresUpd =
 	    	    Integer.parseInt (fields[DATA_STRUCTURES_UPD] );
 
-		// create a new Version object (how ???)
-		Version v = new Version ();
+		// we expect an appropriate ctor here @Master
+		Version v = new Version (initOperationsNum,
+					 initDataStructuresNum, id, date,
+					 opAdd, opDel, opUpd,
+					 dataStructuresAdd, dataStructuresDel,
+					 dataStructuresUpd);
 		versions.add (v);
 	    }
 	} catch (IOException e) {
 	    // Send trace to stdout
 	    System.err.format ("IOException: %s%n", e);
 	}
-
 	return versions;
     }
-    
-    public HistoryParser (Path file) {
-	historyFile = file;
-	readFile ();
-    }
-
 }
