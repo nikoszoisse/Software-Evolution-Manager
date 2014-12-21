@@ -48,8 +48,8 @@ public class HistoryParser {
 	     Files.newBufferedReader (historyFile,
 				      StandardCharsets.US_ASCII)) {
 	    
-	    String line;
-	    line = reader.readLine ();
+	    String line = reader.readLine (); // skip first two lines
+	    line = reader.readLine (); line = reader.readLine ();
 	    String[] fields = line.split (";");
 	    initOperationsNum = Integer.parseInt (fields[1] );
 	    
