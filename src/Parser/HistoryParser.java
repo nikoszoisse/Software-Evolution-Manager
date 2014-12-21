@@ -24,6 +24,7 @@ public class HistoryParser {
     
     private Path historyFile;
     
+    private String softwareName;
     private int initOperationsNum;
     private int initDataStructuresNum;
 
@@ -48,9 +49,12 @@ public class HistoryParser {
 	     Files.newBufferedReader (historyFile,
 				      StandardCharsets.US_ASCII)) {
 	    
-	    String line = reader.readLine (); // skip first two lines
-	    line = reader.readLine (); line = reader.readLine ();
+	    String line = reader.readLine ();
 	    String[] fields = line.split (";");
+	    softwareName = fields[1];
+	    // skip next line
+	    line = reader.readLine (); line = reader.readLine ();
+	    fields = line.split (";");
 	    initOperationsNum = Integer.parseInt (fields[1] );
 	    
 	    line = reader.readLine ();
@@ -74,15 +78,15 @@ public class HistoryParser {
 	    	    Integer.parseInt (fields[DATA_STRUCTURES_UPD] );
 
 		// we expect an appropriate ctor here @Master
-		Version v = new Version (initOperationsNum,
+		Version v = new Version (softwareName, initOperationsNum,
 					 initDataStructuresNum, id, date,
 					 opAdd, opDel, opUpd,
 					 dataStructuresAdd, dataStructuresDel,
 					 dataStructuresUpd);
 		versions.add (v);
 	    }
+	    System.out.println (softwareName);
 	} catch (IOException e) {
-	    // Send trace to stdout
 	    System.err.format ("IOException: %s%n", e);
 	}
 	return versions;
