@@ -1,3 +1,5 @@
+package Parser;
+
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.BufferedReader;
@@ -6,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import application.Version;
 
 /**
  * @author mtsio
