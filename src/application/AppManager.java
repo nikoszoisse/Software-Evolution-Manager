@@ -13,4 +13,27 @@ public class AppManager {
 	private ViewEngine view_engine;
 	private ParserController parser_controller;
 	private HistoryReportEngine history_report;
+	
+	public void initializeViewEngine(){
+		view_engine = new ViewEngine(this);
+		view_engine.initialize();
+	}
+
+	public void parseFile(String name) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.out.println("Hey "+name);
+		Thread th = new Thread(){
+			public void run(){
+				try {
+					sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("After 5");
+			}
+		};
+		
+		th.start();
+	}
 }

@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 
 import application.AppManager;
 
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -16,8 +17,14 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class ViewEngine {
@@ -69,6 +76,7 @@ public class ViewEngine {
 		menuBar.add(mnFileMenu);
 		
 		JMenuItem mntmOpenHistoryFile = new JMenuItem("Open History File");
+		
 		mnFileMenu.add(mntmOpenHistoryFile);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
@@ -112,8 +120,42 @@ public class ViewEngine {
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
+		
+		/**
+		 * Listeneres
+		 */
+		
+		/*Open History file Listener & Open Dalog File*/
+		mntmOpenHistoryFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(arg0.getActionCommand());
+				final JFileChooser chooser = new JFileChooser();
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "TxT History Files", "txt");
+			    chooser.setFileFilter(filter);
+			    int returnVal = chooser.showOpenDialog(null);
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {
+			    	//Tell to AppManager to handle the file and parse it!
+			    	try {
+						app.parseFile(chooser.getSelectedFile().getName());
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			    	
+			       System.out.println(" You chose to open this file: " +
+			            chooser.getSelectedFile().getName());
+			    }
+			}
+		});
+		
+	}
+	
+	/**
+	 *Initialize the Tab Panels 
+	 */
+	private void initializeTabPane() {
 		/*TAB BAR*/
-
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.NORTH);
 		/*Add Welcome Home Panel*/
@@ -125,10 +167,8 @@ public class ViewEngine {
 		
 		int tab_index = tabbedPane.getTabCount()-1;
 		initTabComponent(tab_index,tabbedPane);
-		
-		
 	}
-	
+
 	/*
 	 * Chnages the Tab Componet layout in order to add Close Button too
 	 */
@@ -146,7 +186,7 @@ public class ViewEngine {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.initMenuBar();
-		
+		this.initializeTabPane();
 		this.frame.setVisible(true);
 	}
 
