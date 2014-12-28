@@ -6,8 +6,19 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import application.AppManager;
+
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
 
 public class ViewEngine {
 	private final AppManager app;
@@ -101,7 +112,31 @@ public class ViewEngine {
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
+		/*TAB BAR*/
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane, BorderLayout.NORTH);
+		/*Add Welcome Home Panel*/
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Home", null, panel, null);
+		
+		JLabel lblWelcomeToSem = new JLabel("Welcome to SEM project. \r Select \"File\" -> \"Open History File\" to start.");
+		panel.add(lblWelcomeToSem);
+		
+		int tab_index = tabbedPane.getTabCount()-1;
+		initTabComponent(tab_index,tabbedPane);
+		
+		
 	}
+	
+	/*
+	 * Chnages the Tab Componet layout in order to add Close Button too
+	 */
+    private void initTabComponent(int index, JTabbedPane tabbedPane) {
+    	tabbedPane.setTabComponentAt(index,
+    			new ButtonTabComponent(tabbedPane));
+    }
+    
 	/**
 	 * Initialize the contents of the frame.
 	 * @wbp.parser.entryPoint
