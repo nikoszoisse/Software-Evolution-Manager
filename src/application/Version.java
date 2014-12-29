@@ -1,3 +1,4 @@
+﻿
 package application;
 
 public class Version {
@@ -8,7 +9,8 @@ public class Version {
 	private int dataStructuresAdded,dataStructuresDeleted,dataStructuresUpdated;
 	private float opComplexity,dataStructuresComplexity;
 	private int opRateOfGrowth,DataStructuresRateOfGrowth;
-	private float dataStructuresRateOfWork,opRateOfWork;
+	private double dataStructuresRateOfWork,opRateOfWork;
+	private int year;
 	
 	public Version(String softwareName, int initOperationsNum,
 			int initDataStructuresNum, int id, String date, int opAdd,
@@ -45,8 +47,24 @@ public class Version {
 				PrevNumOfDataStructures;
 	}
 	
-	public void computeOperationsRateOfWork(String prevVersionDate){
-		//int timePassed= Πως να υπολογισω το χρονικο διαστημα ?
+	public void computeRateOfWork(String prevVersionDate){
+		int timePassed;
+		String currVersDate[]=this.date.split("/");
+		String prevVersDate[]=prevVersionDate.split("/");
+		/*Κραταμε σε μια μεταβλητη τη χρονια σε περιπτωση 
+		 * που το χρειαστούμε
+		 */
+		year=Integer.parseInt(currVersDate[2]);
+		/*Βρίσκουμε το διαστημα των μερων,μηνων και χρόνων*/
+		int dayDifference=Integer.parseInt(currVersDate[0])-
+				Integer.parseInt(prevVersDate[0]);
+		int monthDifference=Integer.parseInt(currVersDate[1])-
+				Integer.parseInt(prevVersDate[1]);
+		int yearDifference=Integer.parseInt(currVersDate[2])-
+				Integer.parseInt(prevVersDate[2]);
+		/*Κάνουμα absolute την διαφορα μερών και μηνών σε περίπτωση αρνητικών*/
+		timePassed=Math.abs(dayDifference)+Math.abs(monthDifference)*30
+				+365*yearDifference;
 		
 		opRateOfWork=(opAdded+opDeleted+opUpdated)/timePassed;
 		dataStructuresRateOfWork=(dataStructuresAdded+dataStructuresDeleted
@@ -77,12 +95,36 @@ public class Version {
 		return this.dataStructuresComplexity;
 	}
 	
-	public float getOpRateOfWork(){
+	public double getOpRateOfWork(){
 		return this.opRateOfWork;
 	}
 	
-	public float getDataStructuresRateOfWork(){
+	public double getDataStructuresRateOfWork(){
 		return this.dataStructuresRateOfWork;
 	}
+	
+	public String getDate(){
+		return this.date;
+	}
 
+	public int getYear(){
+		return this.year;
+	}
+	
+	public int getId(){
+		return this.id;
+	}
+	
+	public int getOpAdded(){
+		return this.opAdded;
+	}
+	
+	public int getOpChanges(){
+		return (opAdded+opDeleted+opUpdated);
+	}
+	
+	public int getDataChanges(){
+		return (dataStructuresAdded+dataStructuresDeleted
+				+dataStructuresUpdated);
+	}
 }
