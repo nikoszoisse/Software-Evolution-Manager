@@ -135,7 +135,7 @@ public class ViewEngine {
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
 			    	//Tell to AppManager to handle the file and parse it!
 			    	try {
-						app.parseFile(chooser.getSelectedFile().getName());
+						app.parseFileProcedure(chooser.getSelectedFile().getName());
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

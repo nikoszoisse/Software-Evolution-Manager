@@ -18,23 +18,37 @@ public class AppManager {
 		view_engine = new ViewEngine(this);
 		view_engine.initialize();
 	}
-
-	public void parseFile(String name) throws InterruptedException {
-		// TODO Auto-generated method stub
-		System.out.println("Hey "+name);
-		Thread th = new Thread(){
+	
+	//RENAME of parseProcedure
+	/**
+	 * Procedure to parse a file that ncomes from ViewEngine
+	 * @param file_path
+	 * @throws InterruptedException
+	 */
+	public void parseFileProcedure(final String file_path) throws InterruptedException {
+		Thread th = new Thread((Runnable) this){
 			public void run(){
-				try {
-					sleep(5000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("After 5");
+				parser_controller.generateWorkspaceFromFile(file_path);
 			}
 		};
 		
 		th.start();
+	}
+	
+	/**
+	 * TODO 
+	 */
+	public void reportProcedure(Workspace which){
+		if(checkLaws()){
+			//e.x which.checkLaws()
+		}
+	}
+	
+	/*
+	 * Maybe Need to go at Workspace Class
+	 */
+	private boolean checkLaws(){
+		return false;
 	}
 	
 	/**
@@ -44,5 +58,15 @@ public class AppManager {
 	public void setError(String message){
 		//We Handle this error just shoing it to User via ViewEngine
 		this.view_engine.showErrorDialog(message);
+	}
+	
+	/**
+	 * Add the workspace to Workspace list of app
+	 * Inform ViewEngine Too
+	 * @param ret_workspace
+	 */
+	public void addWorkspace(Workspace ret_workspace) {
+		//TODO ADD IT TO LLIST
+		//TODO CALL viewEngine to add it in GUI
 	}
 }
