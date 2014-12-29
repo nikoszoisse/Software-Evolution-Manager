@@ -4,37 +4,48 @@ package application;
 public class Version {
 	//TODO initialize the fields
 	private String softwareName,date;
-	private int operationsNumber,dataStructuresNumber,id;
+	private int initOp,initData,operationsNumber,dataStructuresNumber,id;
 	private int opAdded,opDeleted,opUpdated;
 	private int dataStructuresAdded,dataStructuresDeleted,dataStructuresUpdated;
 	private float opComplexity,dataStructuresComplexity;
-	private int opRateOfGrowth,DataStructuresRateOfGrowth;
-	private double dataStructuresRateOfWork,opRateOfWork;
+	private float opRateOfGrowth,DataStructuresRateOfGrowth;
+	private float dataStructuresRateOfWork,opRateOfWork;
 	private int year;
 	
-	public Version(String softwareName, int initOperationsNum,
-			int initDataStructuresNum, int id, String date, int opAdd,
+	public Version(String softwareName,int initialOperations,int initialData,
+			int id, String date, int opAdd,
 			int opDel, int opUpd, int dataStructuresAdd, int dataStructuresDel,
 			int dataStructuresUpd) {
 		// TODO Auto-generated constructor stub
 		this.softwareName=softwareName;
 		this.id=id;
 		this.date=date;
-		this.operationsNumber=initOperationsNum;
+		this.initOp=initialOperations;
+		this.initData=initialData;
 		this.opAdded=opAdd;
 		this.opDeleted=opDel;
 		this.opUpdated=opUpd;
-		this.dataStructuresNumber=initDataStructuresNum;
 		this.dataStructuresAdded=dataStructuresAdd;
 		this.dataStructuresUpdated=dataStructuresUpd;
 		this.dataStructuresDeleted=dataStructuresDel;
+		calculateOpAndData();
 		calculateComplexities();
 	}
 	
 	private void calculateComplexities(){
+		if(opAdded==0)
+			opAdded=1;
 		opComplexity=(opUpdated+opDeleted)/opAdded;
+		if(dataStructuresAdded==0)
+			dataStructuresAdded=1;
 		dataStructuresComplexity=(dataStructuresUpdated+dataStructuresDeleted)/
 				dataStructuresAdded;
+	}
+	
+	private void calculateOpAndData(){
+		operationsNumber=opAdded+opDeleted+initOp;
+		dataStructuresNumber=dataStructuresAdded+dataStructuresDeleted+
+				initData;
 	}
 	
 	public void calculateOperationsRateOfGrowth(int opNumOfPreviousVersion){
@@ -79,11 +90,11 @@ public class Version {
 		return this.dataStructuresNumber;
 	}
 	
-	public int getOpRateOfGrowth(){
+	public float getOpRateOfGrowth(){
 		return this.opRateOfGrowth;
 	}
 	
-	public int getDataStructuresRateOfGrowth(){
+	public float getDataStructuresRateOfGrowth(){
 		return this.DataStructuresRateOfGrowth;
 	}
 	
@@ -95,11 +106,11 @@ public class Version {
 		return this.dataStructuresComplexity;
 	}
 	
-	public double getOpRateOfWork(){
+	public float getOpRateOfWork(){
 		return this.opRateOfWork;
 	}
 	
-	public double getDataStructuresRateOfWork(){
+	public float getDataStructuresRateOfWork(){
 		return this.dataStructuresRateOfWork;
 	}
 	
@@ -119,11 +130,11 @@ public class Version {
 		return this.opAdded;
 	}
 	
-	public int getOpChanges(){
+	public float getOpChanges(){
 		return (opAdded+opDeleted+opUpdated);
 	}
 	
-	public int getDataChanges(){
+	public float getDataChanges(){
 		return (dataStructuresAdded+dataStructuresDeleted
 				+dataStructuresUpdated);
 	}
