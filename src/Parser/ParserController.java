@@ -21,9 +21,13 @@ public class ParserController {
 			return null;
 		}else{
 			//Return the Workspace
-			//TODO Handle here the errors of used_parser e.x wrong syntax of file
-			//app.setError(used_parser.getErrors());
-			return used_parser.requestWorkspace();
+			Workspace ret_workspace = used_parser.requestWorkspace();
+			if(used_parser.getErrors() != null){
+				app.setError(used_parser.getErrors());
+				return null;
+			}
+			
+			return ret_workspace;
 		}
 	}
 	
