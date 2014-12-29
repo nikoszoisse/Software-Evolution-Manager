@@ -129,10 +129,12 @@ public class ViewEngine {
 		mntmOpenHistoryFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(arg0.getActionCommand());
+				//Set up J File Chooser
 				final JFileChooser chooser = new JFileChooser();
 			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 			        "TxT History Files", "txt");
 			    chooser.setFileFilter(filter);
+			    
 			    int returnVal = chooser.showOpenDialog(null);
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
 			    	//Tell to AppManager to handle the file and parse it!
