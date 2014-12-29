@@ -43,8 +43,14 @@ public class ViewEngine {
 		
 	}
 	
-	public void createSaveFileDialog(){
-		
+	public JFileChooser createOpenFileDialog(){
+		//Set up J File Chooser
+		final JFileChooser chooser = new JFileChooser();
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+	        "TxT History Files", "txt");
+	    chooser.setFileFilter(filter);
+	    
+	    return chooser;
 	}
 	
 	public void createReportFileDialog(){
@@ -125,17 +131,14 @@ public class ViewEngine {
 		mntmOpenHistoryFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(arg0.getActionCommand());
-				//Set up J File Chooser
-				final JFileChooser chooser = new JFileChooser();
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "TxT History Files", "txt");
-			    chooser.setFileFilter(filter);
-			    
-			    int returnVal = chooser.showOpenDialog(null);
+				JFileChooser chooser = createOpenFileDialog();
+				int returnVal = chooser.showOpenDialog(null);
+				
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
 			    	//Tell to AppManager to handle the file and parse it!
 			    	try {
-						app.parseFileProcedure(chooser.getSelectedFile().getName());
+			    		String file_path = chooser.getSelectedFile().getAbsolutePath();
+						app.parseFileProcedure(file_path);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

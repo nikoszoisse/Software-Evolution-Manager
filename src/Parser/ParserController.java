@@ -8,16 +8,21 @@ public class ParserController {
 	
 	private AppManager app;
 	
+	public ParserController(AppManager appManager) {
+		app = appManager;
+	}
+
 	/**
 	 *  Used y appManager in order to parse a file
 	 * @param file_path
 	 * @return Workspace if generated succesfully
 	 */
 	public void generateWorkspaceFromFile(String file_path){ 
+		
 		int dot = file_path.lastIndexOf(".");
 		String file_extension = file_path.substring(dot + 1);
 		
-		Parser used_parser = chooseParser(file_extension );
+		Parser used_parser = chooseParser(file_extension);
 		if(used_parser == null){
 			app.setError("This file Extension does not supported in this version");
 		}

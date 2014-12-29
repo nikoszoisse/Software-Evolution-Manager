@@ -16,6 +16,7 @@ public class AppManager {
 	
 	public void initializeViewEngine(){
 		view_engine = new ViewEngine(this);
+		parser_controller = new ParserController(this);
 		view_engine.initialize();
 	}
 	
@@ -26,7 +27,7 @@ public class AppManager {
 	 * @throws InterruptedException
 	 */
 	public void parseFileProcedure(final String file_path) throws InterruptedException {
-		Thread th = new Thread((Runnable) this){
+		Thread th = new Thread(){
 			public void run(){
 				parser_controller.generateWorkspaceFromFile(file_path);
 			}
