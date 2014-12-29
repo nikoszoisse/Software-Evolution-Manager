@@ -3,6 +3,7 @@ package Parser;
 import application.AppManager;
 import application.Workspace;
 
+
 public class ParserController {
 	
 	private AppManager app;
@@ -12,16 +13,18 @@ public class ParserController {
 	 * @param file_path
 	 * @return Workspace if generated succesfully
 	 */
-	public Workspace generateWorkspaceFromFile(String file_path){
-		String file_extension = file_path;
+	public Workspace generateWorkspaceFromFile(String file_path){ 
+		int dot = file_path.lastIndexOf(".");
+		String file_extension = file_path.substring(dot + 1);
+		
 		Parser used_parser = chooseParser(file_extension );
 		if(used_parser == null){
-			//TODO THROW ERROR for not support this type of file
 			app.setError("This file Extension does not supported in this version");
 			return null;
-		}else{
-			//Return the Workspace
+		}
+		else{
 			Workspace ret_workspace = used_parser.requestWorkspace();
+			
 			if(used_parser.getErrors() != null){
 				app.setError(used_parser.getErrors());
 				return null;
