@@ -36,4 +36,13 @@ public class AppManager {
 		
 		th.start();
 	}
+	
+	/**
+	 * All Error need to be loged here! 
+	 * @param message
+	 */
+	public void setError(String message){
+		//We Handle this error just shoing it to User via ViewEngine
+		this.view_engine.showErrorDialog(message);
+	}
 }

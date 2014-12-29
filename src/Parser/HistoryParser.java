@@ -41,13 +41,18 @@ public class HistoryParser implements Parser{
     private int dataStructuresAdd;
     private int dataStructuresDel;
     private int dataStructuresUpd;
+	private String errors;
 
     public HistoryParser (Path file) {
 	historyFile = file;
 	readFile ();
     }
 
-    public ArrayList <Version> readFile () {
+    public HistoryParser() {
+		// TODO Please follow the report
+	}
+
+	public ArrayList <Version> readFile () {
 	ArrayList <Version> versions =  new ArrayList <Version> ();
 	
 	try (BufferedReader reader =
@@ -107,5 +112,25 @@ public class HistoryParser implements Parser{
 	public void openFile(String file_path) {
 		// TODO Please fix them.
 		
+	}
+
+	@Override
+	public String getErrors() {
+		// TODO Auto-generated method stub
+		return errors;
+	}
+	
+	/**
+	 * When you have an Error that weneed to show to user set it up!!
+	 * @param error_message
+	 */
+	@Override
+	public void setError(String error_message) {
+		// TODO Auto-generated method stub
+		if(errors == null)
+			errors+=error_message;
+		else
+			errors+=", "+error_message;
+		//Initialize a variable String Errors
 	}
 }
