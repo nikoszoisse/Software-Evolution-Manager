@@ -10,12 +10,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import application.Version;
+import application.Workspace;
 
 /**
  * @author mtsio
  */
 
-public class HistoryParser {
+public class HistoryParser implements Parser{
     // positions of fields so we don't have to remember the format of the file
     final int ID = 0;
     final int DATE = 1;
@@ -95,4 +96,16 @@ public class HistoryParser {
 	}
 	return versions;
     }
+
+	@Override
+	public Workspace requestWorkspace() {
+		// TODO Please Fix them
+		return null;
+	}
+
+	@Override
+	public void openFile(String file_path) {
+		// TODO Please fix them.
+		
+	}
 }

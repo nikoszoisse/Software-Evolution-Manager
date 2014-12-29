@@ -7,7 +7,6 @@ import javax.swing.JMenuBar;
 
 import application.AppManager;
 
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -118,8 +117,8 @@ public class ViewEngine {
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		
-		/**
-		 * Listeneres
+		/*
+		 * set up Button Listeners
 		 */
 		
 		/*Open History file Listener & Open Dalog File*/
@@ -168,8 +167,10 @@ public class ViewEngine {
 		initTabComponent(tab_index,tabbedPane);
 	}
 
-	/*
+	/**
 	 * Chnages the Tab Componet layout in order to add Close Button too
+	 * @param index
+	 * @param tabbedPane
 	 */
     private void initTabComponent(int index, JTabbedPane tabbedPane) {
     	tabbedPane.setTabComponentAt(index,
