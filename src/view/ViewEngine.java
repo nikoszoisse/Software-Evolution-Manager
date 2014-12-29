@@ -61,15 +61,10 @@ public class ViewEngine {
 		
 	}
 	
-	public void exportReportEvent(String file_path){
-		
-	}
-	
-	public void parseFileEvent(String file_path){
-		
-	}
-	
-	/*Initialize Menu Bar and Items*/
+	/**
+	 * Initialize Menu Bar and Items
+	 * 
+	 * */
 	private void initMenuBar(){
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -139,6 +134,7 @@ public class ViewEngine {
 			    	try {
 			    		String file_path = chooser.getSelectedFile().getAbsolutePath();
 						app.parseFileProcedure(file_path);
+						
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
