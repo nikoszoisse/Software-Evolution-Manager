@@ -8,6 +8,8 @@ public class Law {
 	private float[] chart_one_values_x,chart_one_values_y;
 	private float[] chart_two_values_x,chart_two_values_y;
 	private int num_of_charts;
+	private boolean accepted;
+	private String comment;
 	
 	public Law(String chart_one_label_x, String chart_one_label_y,
 			String chart_two_label_x, String chart_two_label_y,
@@ -115,6 +117,22 @@ public class Law {
 	
 	public void setNum_of_charts(int num_of_charts) {
 		this.num_of_charts = num_of_charts;
+	}
+
+	public boolean isAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	
 
