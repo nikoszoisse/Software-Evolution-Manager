@@ -193,5 +193,9 @@ public class Workspace {
 	public float[] getDataChanges(){
 		return this.dataChanges;
 	}
+
+	public String getTitle() {
+		return title;
+	}
 }
 
