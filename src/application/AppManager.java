@@ -1,7 +1,5 @@
 package application;
 
-import java.awt.EventQueue;
-
 import report.HistoryReportEngine;
 import Parser.ParserController;
 import view.ViewEngine;
@@ -43,7 +41,7 @@ public class AppManager {
 	 * @param save_file_path,workspace 
 	 */
 	public void reportProcedure(String save_file_path,Workspace workspace){
-		String error = workspace.checkLaws();
+		String error = workspace.checkIfLawsEvaluated();
 		if( error != null){
 			//TODO All Ok report it dam
 		}

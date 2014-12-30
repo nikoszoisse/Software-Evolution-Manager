@@ -34,63 +34,6 @@ public class Law {
 	public String getChartLabelY(int index) {
 		return labelY[index];
 	}
-	
-	
-	public ChartType getChart_one() {
-		return chart_one;
-	}
-	
-	public void setChart_one(ChartType chart_one) {
-		this.chart_one = chart_one;
-	}
-	
-	public ChartType getChart_two() {
-		return chart_two;
-	}
-	
-	public void setChart_two(ChartType chart_two) {
-		this.chart_two = chart_two;
-	}
-	
-	public float[] getChart_one_values_x() {
-		return chart_one_values_x;
-	}
-	
-	public void setChart_one_values_x(float[] chart_one_values_x) {
-		this.chart_one_values_x = chart_one_values_x;
-	}
-	
-	public float[] getChart_one_values_y() {
-		return chart_one_values_y;
-	}
-	
-	public void setChart_one_values_y(float[] chart_one_values_y) {
-		this.chart_one_values_y = chart_one_values_y;
-	}
-	
-	public float[] getChart_two_values_x() {
-		return chart_two_values_x;
-	}
-	
-	public void setChart_two_values_x(float[] chart_two_values_x) {
-		this.chart_two_values_x = chart_two_values_x;
-	}
-	
-	public float[] getChart_two_values_y() {
-		return chart_two_values_y;
-	}
-	
-	public void setChart_two_values_y(float[] chart_two_values_y) {
-		this.chart_two_values_y = chart_two_values_y;
-	}
-	
-	public int getNum_of_charts() {
-		return num_of_charts;
-	}
-	
-	public void setNum_of_charts(int num_of_charts) {
-		this.num_of_charts = num_of_charts;
-	}
 
 	public boolean isAccepted() {
 		return accepted;
