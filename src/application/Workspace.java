@@ -201,5 +201,15 @@ public class Workspace {
 	public int getNumOfVersions() {
 		return this.versions.size();
 	}
+	
+	public int getNumOfEvaluatedLaws(){
+		int ret_val = 0;
+		for(int i=0;i<laws.size();i++){
+			if(laws.get(i).checkLaw())
+				ret_val++;
+		}
+		return ret_val;
+		
+	}
 }
 
