@@ -214,23 +214,5 @@ public class ViewEngine {
 			    "Opps error",
 			    JOptionPane.ERROR_MESSAGE);
 	}
-	
-	/**
-	 * Launch the application.
-	 * @wbp.parser.entryPoint
-	 */
-	//TODO Remove it when public 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AppManager app_test = new AppManager();
-					app_test.initializeViewEngine();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 }

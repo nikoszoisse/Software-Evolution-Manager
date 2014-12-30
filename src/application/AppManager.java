@@ -1,5 +1,7 @@
 package application;
 
+import java.awt.EventQueue;
+
 import report.HistoryReportEngine;
 import Parser.ParserController;
 import view.ViewEngine;
@@ -14,7 +16,7 @@ public class AppManager {
 	private ParserController parser_controller;
 	private HistoryReportEngine history_report;
 	
-	public void initializeViewEngine(){
+	public void initialize(){
 		view_engine = new ViewEngine(this);
 		parser_controller = new ParserController(this);
 		view_engine.initialize();
@@ -67,5 +69,23 @@ public class AppManager {
 	public void addWorkspace(Workspace ret_workspace) {
 		//TODO ADD IT TO LLIST
 		this.view_engine.addTab(ret_workspace);
+	}
+	
+	/**
+	 * Launch the application.
+	 * @wbp.parser.entryPoint
+	 */
+	//TODO Remove it when public 
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AppManager app_test = new AppManager();
+					app_test.initialize();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
