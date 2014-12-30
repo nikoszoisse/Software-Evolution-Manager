@@ -1,5 +1,4 @@
-﻿
-package application;
+﻿package application;
 
 public class Version {
 	//TODO initialize the fields
@@ -10,7 +9,7 @@ public class Version {
 	private float opComplexity,dataStructuresComplexity;
 	private float opRateOfGrowth,DataStructuresRateOfGrowth;
 	private float dataStructuresRateOfWork,opRateOfWork;
-	private int year;
+	private int year,day,month;
 	
 	public Version(String softwareName,int initialOperations,int initialData,
 			int id, String date, int opAdd,
@@ -29,6 +28,7 @@ public class Version {
 		this.dataStructuresUpdated=dataStructuresUpd;
 		this.dataStructuresDeleted=dataStructuresDel;
 		calculateComplexities();
+		setDayYearMonth(date);
 	}
 	
 	private void calculateComplexities(){
@@ -57,24 +57,8 @@ public class Version {
 				PrevNumOfDataStructures;
 	}
 	
-	public void computeRateOfWork(String prevVersionDate){
-		int timePassed;
-		String currVersDate[]=this.date.split("/");
-		String prevVersDate[]=prevVersionDate.split("/");
-		/*Κραταμε σε μια μεταβλητη τη χρονια σε περιπτωση 
-		 * που το χρειαστούμε
-		 */
-		year=Integer.parseInt(currVersDate[2]);
-		/*Βρίσκουμε το διαστημα των μερων,μηνων και χρόνων*/
-		int dayDifference=Integer.parseInt(currVersDate[0])-
-				Integer.parseInt(prevVersDate[0]);
-		int monthDifference=Integer.parseInt(currVersDate[1])-
-				Integer.parseInt(prevVersDate[1]);
-		int yearDifference=Integer.parseInt(currVersDate[2])-
-				Integer.parseInt(prevVersDate[2]);
-		/*Κάνουμα absolute την διαφορα μερών και μηνών σε περίπτωση αρνητικών*/
-		timePassed=Math.abs(dayDifference)+Math.abs(monthDifference)*30
-				+365*yearDifference;
+	public void computeRateOfWork(Version prevVersion){
+		int timePassed=1/*Den exei vrethei akoma lush */;
 		
 		opRateOfWork=(opAdded+opDeleted+opUpdated)/timePassed;
 		dataStructuresRateOfWork=(dataStructuresAdded+dataStructuresDeleted
@@ -87,6 +71,12 @@ public class Version {
 		return mantainance;
 	}
 	
+	private void setDayYearMonth(String date){
+		String[] versDate=date.split("/");
+		this.day=Integer.parseInt(versDate[0]);
+		this.month=Integer.parseInt(versDate[1]);
+		this.year=Integer.parseInt(versDate[2]);
+	}
 	public int getNumOfOperations(){
 		return this.operationsNumber;
 	}
@@ -123,6 +113,12 @@ public class Version {
 		return this.date;
 	}
 
+	public int getDay(){
+		return this.day;
+	}
+	public int getMonth(){
+		return this.month;
+	}
 	public int getYear(){
 		return this.year;
 	}
@@ -144,3 +140,4 @@ public class Version {
 				+dataStructuresUpdated);
 	}
 }
+

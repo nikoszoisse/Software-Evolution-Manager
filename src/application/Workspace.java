@@ -74,7 +74,7 @@ public class Workspace {
 	public void computeRateOfWork(){
 		for(int i=1;i<versions.size();i++){
 			versions.get(i).computeRateOfWork(
-					versions.get(i-1).getDate());
+					versions.get(i-1));
 			opRateOfWork[i]=versions.get(i).getOpRateOfWork();
 			dataRateOfWork[i]=versions.get(i).getDataStructuresRateOfWork();
 		}
@@ -101,7 +101,30 @@ public class Workspace {
 	}
 	
 	public void calculateVersionsPerYear(){
-		
+		int yearCounter=1;
+		int currPos=-1;/*me auth th metavlhth tha vroume poso xwro tha exei
+		o pinakas versionsPerYear*/
+		/*xrhshmopoioume temp Pinaka gia na mikrinoume to
+		 * megethos tou pinaka versionsPerYear wste na mn exei
+		 * size=versions.size()
+		 */
+		float[] tempArray=new float[versions.size()];
+		ArrayList<Integer> tempList=new ArrayList();
+		for(int i=0;i<versions.size();i++){
+			if(!tempList.contains(versions.get(i).getYear())){
+				yearCounter=1;
+				tempList.add(versions.get(i).getYear());
+				currPos++;
+			}
+			else{
+				yearCounter++;
+			}
+			tempArray[currPos]=yearCounter;
+		}
+		versionsPerYear=new float[currPos+1];
+		for(int i=0;i<=currPos;i++){
+			versionsPerYear[i]=tempArray[i];
+		}
 	}
 	
 	public String checkIfLawsEvaluated(){

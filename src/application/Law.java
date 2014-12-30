@@ -34,6 +34,18 @@ public class Law {
 	public String getChartLabelY(int index) {
 		return labelY[index];
 	}
+	
+	public ChartType getChart(int index){
+		return this.chartTypes.get(index);
+	}
+	
+	public int getNum_of_charts() {
+		return numOfCharts;
+	}
+	
+	public void setNum_of_charts(int num_of_charts) {
+		this.numOfCharts = num_of_charts;
+	}
 
 	public boolean isAccepted() {
 		return accepted;
