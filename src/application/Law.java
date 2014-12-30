@@ -1,68 +1,40 @@
 package application;
+import java.util.ArrayList;
 
 public class Law {
 	
-	private String chart_one_label_x,chart_one_label_y;
-	private String chart_two_label_x,chart_two_label_y;
-	private ChartType chart_one,chart_two;
-	private float[] chart_one_values_x,chart_one_values_y;
-	private float[] chart_two_values_x,chart_two_values_y;
-	private int num_of_charts;
+	private String[] labelX,labelY;
+	private ArrayList<ChartType> chartTypes;
+	private ArrayList<int[]> valuesX;
+	private ArrayList<float[]> valuesY;
+	private int numOfCharts;
 	private boolean accepted;
 	private boolean lawChecked;
 	private String comment;
 	
-	public Law(String chart_one_label_x, String chart_one_label_y,
-			String chart_two_label_x, String chart_two_label_y,
-			ChartType chart_one, ChartType chart_two,
-			float[] chart_one_values_x, float[] chart_one_values_y,
-			float[] chart_two_values_x, float[] chart_two_values_y,
-			int num_of_charts) {
+	public Law(String[] labelX, String[] labelY,ArrayList<ChartType> chartTypes,
+			ArrayList<int[]> valuesX,ArrayList<float[]> valuesY,int num_of_charts) {
 		super();
-		this.chart_one_label_x = chart_one_label_x;
-		this.chart_one_label_y = chart_one_label_y;
-		this.chart_two_label_x = chart_two_label_x;
-		this.chart_two_label_y = chart_two_label_y;
-		this.chart_one = chart_one;
-		this.chart_two = chart_two;
-		this.chart_one_values_x = chart_one_values_x;
-		this.chart_one_values_y = chart_one_values_y;
-		this.chart_two_values_x = chart_two_values_x;
-		this.chart_two_values_y = chart_two_values_y;
-		this.num_of_charts = num_of_charts;
+		this.labelX = labelX;
+		this.labelY = labelY;
+		this.chartTypes=chartTypes;
+		this.valuesX=valuesX;
+		this.valuesY=valuesY;
+		this.numOfCharts = num_of_charts;
 	}
 	
-	public String getChart_one_label_x() {
-		return chart_one_label_x;
+	public Law(){//constuctor gia laws xwris grafikes parastaseis 
+		super();
 	}
 	
-	public void setChart_one_label_x(String chart_one_label_x) {
-		this.chart_one_label_x = chart_one_label_x;
+	public String getChartLabelX(int index) {
+		return labelX[index];
 	}
 	
-	public String getChart_one_label_y() {
-		return chart_one_label_y;
+	public String getChartLabelY(int index) {
+		return labelY[index];
 	}
 	
-	public void setChart_one_label_y(String chart_one_label_y) {
-		this.chart_one_label_y = chart_one_label_y;
-	}
-	
-	public String getChart_two_label_x() {
-		return chart_two_label_x;
-	}
-	
-	public void setChart_two_label_x(String chart_two_label_x) {
-		this.chart_two_label_x = chart_two_label_x;
-	}
-	
-	public String getChart_two_label_y() {
-		return chart_two_label_y;
-	}
-	
-	public void setChart_two_label_y(String chart_two_label_y) {
-		this.chart_two_label_y = chart_two_label_y;
-	}
 	
 	public ChartType getChart_one() {
 		return chart_one;

@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Workspace {
 	private String title = "A Workspace";
 	private ArrayList<Version> versions;
-	private ArrayList<Law> laws;
+	private ArrayList<Law> laws=new ArrayList();
 	private int initOpNum;
 	private int initDataStructuresNum;
 	private float[] opPerVersion,dataPerVersion;
@@ -17,6 +17,7 @@ public class Workspace {
 	private float[] opChanges,dataChanges;
 	private float[] versionsPerYear;
 	private float[] maintainancePerVersion;
+	private int[] versionsId,year;
 	
 	public Workspace(String title,ArrayList<Version> version){
 		this.title = title;
@@ -32,6 +33,13 @@ public class Workspace {
 		opChanges=new float[versions.size()];
 		dataChanges=new float[versions.size()];
 		maintainancePerVersion=new float[versions.size()];
+		versionsId=new int[versions.size()];
+	}
+	
+	public void setUpVersionsId(){
+		for(int i=0;i<versions.size();i++){
+			versionsId[i]=i+1;
+		}
 	}
 	
 	public Version getVersion(int index){
@@ -96,7 +104,7 @@ public class Workspace {
 		
 	}
 	
-	public String checkLaws(){
+	public String checkIfLawsEvaluated(){
 		String message="";
 		int lawNumber=0;
 		boolean lawEvaluation=true;
@@ -114,58 +122,114 @@ public class Workspace {
 		return message;
 	}
 	
-	public void checkLaw1(){
-		/*laws.add(new Law(....))*/
-		/*Mesa vazoume tous pinakes
-		 * float[] opChanges
-		 * float[] dataChanges
-		 * float[] versionsPerYear*/
+	public void setUpLaw1(){
+		ArrayList<ChartType> chartType =new ArrayList();
+		//private oles oi alles methodoi ???
+		chartType.add(ChartType.CHART_BARS);
+		String[] labelY=new String[2];
+		labelY[0]="number of Changes";
+		labelY[1]="number of Versions";
+		String[] labelX=new String[2];
+		labelX[0]="Versions Id";
+		labelX[1]="Year";
+		ArrayList<int[]> valuesX=new ArrayList();
+		ArrayList<float[]> valuesY=new ArrayList();
+		valuesY.add(opChanges);
+		valuesY.add(dataChanges);
+		valuesY.add(versionsPerYear);
+		valuesX.add(versionsId);
+		valuesX.add(year);
+		laws.add(0,new Law(labelX,labelY,chartType,valuesX,valuesY,3));
+		
 	}
 	
-	public void checkLaw2(){
-		/*law.add(new Law(...))
-		 * Oi pinakes einai
-		 * float[] opComplexities
-		 * float[] dataComplexities
-		 * float[] mantainancePerVersion*/
+	public void setUpLaw2(){
+		ArrayList<ChartType> chartType =new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
+		chartType.add(ChartType.CHART_BARS);
+		String[] labelY=new String[2];
+		labelY[0]="Complexity";
+		labelY[1]="number of actions";
+		String[] labelX=new String[1];
+		labelX[0]="versionsId";
+		ArrayList<int[]> valuesX=new ArrayList();
+		ArrayList<float[]> valuesY=new ArrayList();
+		valuesX.add(versionsId);
+		valuesY.add(opComplexities);
+		valuesY.add(dataComplexities);
+		valuesY.add(maintainancePerVersion);
+		laws.add(1,new Law(labelX,labelY,chartType,valuesX,valuesY,3));
 	}
 	
-	public void checkLaw3(){
-		/*law.add(new Law(..))
-		 * Pinakes
-		 * float[] opRateOfGrowth
-		 * float[] opDataRateOfGrowth*/
+	public void setUpLaw3(){
+		ArrayList<ChartType> chartType =new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
+		String[] labelY=new String[1];
+		labelY[0]="RateOfGrowth";
+		String[] labelX=new String[1];
+		labelX[0]="versionsId";
+		ArrayList<int[]> valuesX=new ArrayList();
+		ArrayList<float[]> valuesY=new ArrayList();
+		valuesX.add(versionsId);
+		valuesY.add(opRateOfGrowth);
+		valuesY.add(dataRateOfGrowth);
+		laws.add(2,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void checkLaw4(){
-		/*law.add(new Law(..))
-		 * Pinakes
-		 * float[] opRateOfWork
-		 * float[] dataRateOfWork*/
+	public void setUpLaw4(){
+		ArrayList<ChartType> chartType =new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
+		String[] labelY=new String[1];
+		labelY[0]="RateOfGrowth";
+		String[] labelX=new String[1];
+		labelX[0]="versionsId";
+		ArrayList<int[]> valuesX=new ArrayList();
+		ArrayList<float[]> valuesY=new ArrayList();
+		valuesX.add(versionsId);
+		valuesY.add(opRateOfWork);
+		valuesY.add(dataRateOfWork);
+		laws.add(3,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void checkLaw5(){
-		/*law.add(new Law(..))
-		 * Pinakes
-		 * float[] opRateOfGrowth
-		 * float[] opDataRateOfGrowth*/
+	public void setUpLaw5(){//Epanalhpsh Kwdika
+		ArrayList<ChartType> chartType =new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
+		String[] labelY=new String[1];
+		labelY[0]="RateOfGrowth";
+		String[] labelX=new String[1];
+		labelX[0]="versionsId";
+		ArrayList<int[]> valuesX=new ArrayList();
+		ArrayList<float[]> valuesY=new ArrayList();
+		valuesX.add(versionsId);
+		valuesY.add(opRateOfGrowth);
+		valuesY.add(dataRateOfGrowth);
+		laws.add(4,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void checkLaw6(){
-		/*law.add(new Law(..))
-		 * Pinakes
-		 * float[] opPerVersion
-		 * float[] dataPerVersion*/
+	public void setUpLaw6(){
+		ArrayList<ChartType> chartType =new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
+		String[] labelY=new String[2];
+		labelY[0]="number of Operations";
+		labelY[1]="number of DataStructures";
+		String[] labelX=new String[1];
+		labelX[0]="Version Id";
+		ArrayList<int[]> valuesX=new ArrayList();
+		ArrayList<float[]> valuesY=new ArrayList();
+		valuesX.add(versionsId);
+		valuesY.add(opPerVersion);
+		valuesY.add(dataPerVersion);
+		laws.add(5,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void checkLaw7(){
-		/*law.add(new Law(...))*/
+	public void setUpLaw7(){
+		laws.add(6,new Law());
 		if(laws.get(2).isAccepted()&&laws.get(6).isAccepted()){
 			laws.get(7).setAccepted(true);
 		}
 	}
 	
-	public void checkLaw8(){
+	public void setUpLaw8(){
 		
 	}
 	
