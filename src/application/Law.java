@@ -9,6 +9,7 @@ public class Law {
 	private float[] chart_two_values_x,chart_two_values_y;
 	private int num_of_charts;
 	private boolean accepted;
+	private boolean lawChecked;
 	private String comment;
 	
 	public Law(String chart_one_label_x, String chart_one_label_y,
@@ -124,6 +125,7 @@ public class Law {
 	}
 
 	public void setAccepted(boolean accepted) {
+		this.lawChecked=true;
 		this.accepted = accepted;
 	}
 
@@ -133,6 +135,10 @@ public class Law {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public boolean checkLaw(){
+		return this.lawChecked;
 	}
 	
 

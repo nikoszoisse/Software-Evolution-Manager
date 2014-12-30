@@ -28,7 +28,6 @@ public class Version {
 		this.dataStructuresAdded=dataStructuresAdd;
 		this.dataStructuresUpdated=dataStructuresUpd;
 		this.dataStructuresDeleted=dataStructuresDel;
-		calculateOpAndData();
 		calculateComplexities();
 	}
 	
@@ -42,10 +41,10 @@ public class Version {
 				dataStructuresAdded;
 	}
 	
-	private void calculateOpAndData(){
-		operationsNumber=opAdded+opDeleted+initOp;
+	public void calculateOpAndData(int previousOp,int previousData){
+		operationsNumber=opAdded+opDeleted+previousOp;
 		dataStructuresNumber=dataStructuresAdded+dataStructuresDeleted+
-				initData;
+				previousData;
 	}
 	
 	public void calculateOperationsRateOfGrowth(int opNumOfPreviousVersion){
@@ -80,6 +79,12 @@ public class Version {
 		opRateOfWork=(opAdded+opDeleted+opUpdated)/timePassed;
 		dataStructuresRateOfWork=(dataStructuresAdded+dataStructuresDeleted
 				+dataStructuresUpdated)/timePassed;
+	}
+	
+	public int getMaintainance(){
+		int mantainance=opDeleted+opUpdated+
+				dataStructuresDeleted+dataStructuresUpdated;
+		return mantainance;
 	}
 	
 	public int getNumOfOperations(){
