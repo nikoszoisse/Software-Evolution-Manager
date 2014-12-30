@@ -197,5 +197,9 @@ public class Workspace {
 	public String getTitle() {
 		return title;
 	}
+
+	public int getNumOfVersions() {
+		return this.versions.size();
+	}
 }
 
