@@ -37,19 +37,17 @@ public class AppManager {
 	}
 	
 	/**
-	 * TODO 
+	 * Creates report File in save_file_path if all laws evaluated
+	 * @param save_file_path,workspace 
 	 */
-	public void reportProcedure(Workspace which){
-		if(checkLaws()){
-			//e.x which.checkLaws()
+	public void reportProcedure(String save_file_path,Workspace workspace){
+		String error = workspace.checkLaws();
+		if( error != null){
+			//TODO All Ok report it dam
 		}
-	}
-	
-	/*
-	 * Maybe Need to go at Workspace Class
-	 */
-	private boolean checkLaws(){
-		return false;
+		else{
+			this.view_engine.showErrorDialog(error);
+		}
 	}
 	
 	/**
@@ -68,6 +66,6 @@ public class AppManager {
 	 */
 	public void addWorkspace(Workspace ret_workspace) {
 		//TODO ADD IT TO LLIST
-		//TODO CALL viewEngine to add it in GUI
+		this.view_engine.addTab(ret_workspace);
 	}
 }

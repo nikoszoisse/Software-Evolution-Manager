@@ -97,6 +97,7 @@ public class HistoryParser implements Parser{
 	    }
 	    System.out.println (softwareName);
 	} catch (IOException e) {
+		
 	    System.err.format ("IOException: %s%n", e);
 	}
 	return versions;
@@ -105,6 +106,7 @@ public class HistoryParser implements Parser{
 	@Override
 	public Workspace requestWorkspace() {
 		// TODO Please Fix them
+		this.setError("request Workspace doesnt works");
 		return null;
 	}
 
@@ -128,7 +130,7 @@ public class HistoryParser implements Parser{
 	public void setError(String error_message) {
 		// TODO Auto-generated method stub
 		if(errors == null)
-			errors+=error_message;
+			errors=error_message;
 		else
 			errors+=", "+error_message;
 		//Initialize a variable String Errors

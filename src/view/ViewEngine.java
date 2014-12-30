@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import application.AppManager;
+import application.Workspace;
 
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ import java.awt.event.ActionListener;
 public class ViewEngine {
 	private final AppManager app;
 	private JFrame frame;
+	private JTabbedPane tabbedPane;
 
 	/**
 	 * Create the application.
@@ -34,9 +36,17 @@ public class ViewEngine {
 		this.app = running_app;
 	}
 	
-	/*Interact with GUI routines*/
-	public void addTab(){
+	/**
+	 * Creae a tab with the created Workspace(History File)
+	 * @param workspace
+	 */
+	public void addTab(Workspace workspace){
+		WorkspacePanel panel = new WorkspacePanel(workspace);
 		
+		this.tabbedPane.addTab(workspace.getTitle(), null, panel, null);
+		
+		int tab_index = this.tabbedPane.getTabCount()-1;
+		initTabComponent(tab_index,this.tabbedPane);
 	}
 	
 	public void closeTab(){
@@ -153,7 +163,7 @@ public class ViewEngine {
 	 */
 	private void initializeTabPane() {
 		/*TAB BAR*/
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		this.tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.NORTH);
 		/*Add Welcome Home Panel*/
 		JPanel panel = new JPanel();
