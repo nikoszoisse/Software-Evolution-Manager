@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Workspace {
+	private String title = "A Workspace";
 	private ArrayList<Version> versions;
 	private ArrayList<Law> laws;
 	private int initOpNum;
@@ -17,7 +18,8 @@ public class Workspace {
 	private float[] versionsPerYear;
 	private float[] maintainancePerVersion;
 	
-	public Workspace(ArrayList<Version> version){
+	public Workspace(String title,ArrayList<Version> version){
+		this.title = title;
 		this.versions=version;
 		opPerVersion=new float[versions.size()];
 		dataPerVersion=new float[versions.size()];
