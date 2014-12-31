@@ -2,7 +2,7 @@ package application;
 import java.util.ArrayList;
 
 public class Law {
-	
+	private String name;
 	private String[] labelX,labelY;
 	private ArrayList<Law> dependedEvalLaws;
 	private ArrayList<ChartType> chartTypes;
@@ -13,9 +13,10 @@ public class Law {
 	private boolean lawChecked;
 	private String comment;
 	
-	public Law(String[] labelX, String[] labelY,ArrayList<ChartType> chartTypes,
+	public Law(String name,String[] labelX, String[] labelY,ArrayList<ChartType> chartTypes,
 			ArrayList<int[]> valuesX,ArrayList<float[]> valuesY,int num_of_charts) {
 		super();
+		this.name = name;
 		this.labelX = labelX;
 		this.labelY = labelY;
 		this.chartTypes=chartTypes;
@@ -23,12 +24,18 @@ public class Law {
 		this.valuesY=valuesY;
 		this.numOfCharts = num_of_charts;
 		this.dependedEvalLaws = new ArrayList<Law>();
+		this.lawChecked = false;
 	}
 	
 	public Law(){//constuctor gia laws xwris grafikes parastaseis 
 		super();
 	}
 	
+	public Law(String name) {
+		this.name = name;
+		this.lawChecked = false;
+	}
+
 	public void addDependedLaw(Law law){
 		this.dependedEvalLaws.add(law);
 	}
@@ -75,6 +82,14 @@ public class Law {
 	
 	public boolean checkLaw(){
 		return this.lawChecked;
+	}
+
+	public String getLawName() {
+		return name;
+	}
+
+	public void setLawName(String name) {
+		this.name = name;
 	}
 	
 

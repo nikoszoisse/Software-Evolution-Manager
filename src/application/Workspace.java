@@ -162,7 +162,7 @@ public class Workspace {
 		valuesY.add(versionsPerYear);
 		valuesX.add(versionsId);
 		valuesX.add(year);
-		laws.add(0,new Law(labelX,labelY,chartType,valuesX,valuesY,3));
+		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,3));
 		
 	}
 	
@@ -181,7 +181,7 @@ public class Workspace {
 		valuesY.add(opComplexities);
 		valuesY.add(dataComplexities);
 		valuesY.add(maintainancePerVersion);
-		laws.add(1,new Law(labelX,labelY,chartType,valuesX,valuesY,3));
+		laws.add(1,new Law("Law 2",labelX,labelY,chartType,valuesX,valuesY,3));
 	}
 	
 	public void setUpLaw3(){
@@ -196,7 +196,7 @@ public class Workspace {
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfGrowth);
 		valuesY.add(dataRateOfGrowth);
-		laws.add(2,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
+		laws.add(2,new Law("Law 3",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
 	public void setUpLaw4(){
@@ -211,7 +211,7 @@ public class Workspace {
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfWork);
 		valuesY.add(dataRateOfWork);
-		laws.add(3,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
+		laws.add(3,new Law("Law 4",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
 	public void setUpLaw5(){//Epanalhpsh Kwdika
@@ -226,7 +226,7 @@ public class Workspace {
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfGrowth);
 		valuesY.add(dataRateOfGrowth);
-		laws.add(4,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
+		laws.add(4,new Law("Law 5",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
 	public void setUpLaw6(){
@@ -242,18 +242,19 @@ public class Workspace {
 		valuesX.add(versionsId);
 		valuesY.add(opPerVersion);
 		valuesY.add(dataPerVersion);
-		laws.add(5,new Law(labelX,labelY,chartType,valuesX,valuesY,2));
+		laws.add(5,new Law("Law 6",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
 	public void setUpLaw7(){
-		laws.add(6,new Law());
+		laws.add(6,new Law("Law 7"));
+		//TODO Is automated?
 		if(laws.get(2).isAccepted()&&laws.get(6).isAccepted()){
 			laws.get(7).setAccepted(true);
 		}
 	}
 	
 	public void setUpLaw8(){
-		
+		//TODO LAW 8
 	}
 	
 	public float[] getOpComplexities(){
