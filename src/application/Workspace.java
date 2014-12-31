@@ -147,7 +147,9 @@ public class Workspace {
 	
 	public void setUpLaw1(){
 		ArrayList<ChartType> chartType =new ArrayList();
-		//private oles oi alles methodoi ???
+		//TODO private oles oi alles methodoi ??? @NIKOS nai!!
+		chartType.add(ChartType.CHART_BARS);
+		chartType.add(ChartType.CHART_BARS);
 		chartType.add(ChartType.CHART_BARS);
 		String[] labelY=new String[2];
 		labelY[0]="number of Changes";
@@ -162,7 +164,7 @@ public class Workspace {
 		valuesY.add(versionsPerYear);
 		valuesX.add(versionsId);
 		valuesX.add(year);
-		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,3));
+		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,2));
 		
 	}
 	
@@ -181,11 +183,12 @@ public class Workspace {
 		valuesY.add(opComplexities);
 		valuesY.add(dataComplexities);
 		valuesY.add(maintainancePerVersion);
-		laws.add(1,new Law("Law 2",labelX,labelY,chartType,valuesX,valuesY,3));
+		laws.add(1,new Law("Law 2",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
 	public void setUpLaw3(){
 		ArrayList<ChartType> chartType =new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
 		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[1];
 		labelY[0]="RateOfGrowth";
@@ -202,6 +205,7 @@ public class Workspace {
 	public void setUpLaw4(){
 		ArrayList<ChartType> chartType =new ArrayList();
 		chartType.add(ChartType.CHART_LINES);
+		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[1];
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
@@ -217,6 +221,7 @@ public class Workspace {
 	public void setUpLaw5(){//Epanalhpsh Kwdika
 		ArrayList<ChartType> chartType =new ArrayList();
 		chartType.add(ChartType.CHART_LINES);
+		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[1];
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
@@ -231,6 +236,7 @@ public class Workspace {
 	
 	public void setUpLaw6(){
 		ArrayList<ChartType> chartType =new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
 		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[2];
 		labelY[0]="number of Operations";
