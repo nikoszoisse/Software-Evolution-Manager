@@ -8,6 +8,7 @@ import javax.swing.JMenuBar;
 import application.AppManager;
 import application.Workspace;
 
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -67,8 +68,14 @@ public class ViewEngine {
 		
 	}
 	
-	public void viewLaw(){
+	public void viewLaw(int law_num){
+		//TODO Check if returns the referce of the panel or shits 
+		WorkspacePanel current_tab = (WorkspacePanel) this.tabbedPane.getSelectedComponent();
+		Workspace current_tab_wrokspace = current_tab.getWorkspace();
 		
+		LawDialog dialog = new LawDialog(current_tab_wrokspace.getLaw(law_num), this.frame);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
 	}
 	
 	/**

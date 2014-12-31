@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Law {
 	private String name;
 	private String[] labelX,labelY;
-	private ArrayList<Law> dependedEvalLaws;
+	private ArrayList<Integer> dependedEvalLaws;
 	private ArrayList<ChartType> chartTypes;
 	private ArrayList<int[]> valuesX;
 	private ArrayList<float[]> valuesY;
@@ -23,7 +23,7 @@ public class Law {
 		this.valuesX=valuesX;
 		this.valuesY=valuesY;
 		this.numOfCharts = num_of_charts;
-		this.dependedEvalLaws = new ArrayList<Law>();
+		this.dependedEvalLaws = new ArrayList<Integer>();
 		this.lawChecked = false;
 	}
 	
@@ -36,11 +36,11 @@ public class Law {
 		this.lawChecked = false;
 	}
 
-	public void addDependedLaw(Law law){
+	public void addDependedLaw(Integer law){
 		this.dependedEvalLaws.add(law);
 	}
 	
-	public ArrayList<Law> getDependedLaws(){
+	public ArrayList<Integer> getDependedLaws(){
 		return dependedEvalLaws;
 	}
 	public String getChartLabelX(int index) {
