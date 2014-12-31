@@ -36,6 +36,10 @@ public class Workspace {
 		versionsId=new int[versions.size()];
 	}
 	
+	public Law getLaw(int index){
+		return this.laws.get(index);
+	}
+	
 	public void setUpVersionsId(){
 		for(int i=0;i<versions.size();i++){
 			versionsId[i]=i+1;
@@ -287,7 +291,7 @@ public class Workspace {
 	public float[] getDataChanges(){
 		return this.dataChanges;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
