@@ -36,11 +36,22 @@ public class Workspace {
 		versionsId=new int[versions.size()];
 	}
 	
+	public void initialize(){
+		this.setUpVersionsId();
+		this.computeOpAndDataPerVersion();
+		this.computeChanges();
+		this.computeComplexities();
+		this.computeRateOfGrowth();
+		this.computeRateOfWork();
+		this.calculateMaintainance();
+		this.calculateVersionsPerYear();
+	}
+	
 	public Law getLaw(int index){
 		return this.laws.get(index);
 	}
 	
-	public void setUpVersionsId(){
+	private void setUpVersionsId(){
 		for(int i=0;i<versions.size();i++){
 			versionsId[i]=i+1;
 		}
@@ -50,7 +61,7 @@ public class Workspace {
 		return versions.get(index);
 	}
 	
-	public void computeOpAndDataPerVersion(){
+	private void computeOpAndDataPerVersion(){
 		versions.get(0).calculateOpAndData(initOpNum,initDataStructuresNum);
 		opPerVersion[0]=versions.get(0).getNumOfOperations();
 		dataPerVersion[0]=versions.get(0).getNumOfDataStructures();
@@ -62,7 +73,7 @@ public class Workspace {
 		}
 	}
 	
-	public void computeRateOfGrowth(){
+	private void computeRateOfGrowth(){
 		for(int i=1;i<versions.size();i++){
 			versions.get(i).calculateOperationsRateOfGrowth(
 					versions.get(i-1).getNumOfOperations());
@@ -75,7 +86,7 @@ public class Workspace {
 		}
 	}
 	
-	public void computeRateOfWork(){
+	private void computeRateOfWork(){
 		for(int i=1;i<versions.size();i++){
 			versions.get(i).computeRateOfWork(
 					versions.get(i-1));
@@ -84,27 +95,27 @@ public class Workspace {
 		}
 	}
 	
-	public void computeComplexities(){
+	private void computeComplexities(){
 		for(int i=0;i<versions.size();i++){
 			opComplexities[i]=versions.get(i).getOpComplexity();
 			dataComplexities[i]=versions.get(i).getDataStructuresComplexity();
 		}
 	}
 	
-	public void computeChanges(){
+	private void computeChanges(){
 		for(int i=1;i<versions.size();i++){
 			opChanges[i]=versions.get(i).getOpChanges();
 			dataChanges[i]=versions.get(i).getDataChanges();
 		}
 	}
 	
-	public void calculateMaintainance(){
+	private void calculateMaintainance(){
 		for(int i=0;i<versions.size();i++){
 			maintainancePerVersion[i]=versions.get(i).getMaintainance();
 		}
 	}
 	
-	public void calculateVersionsPerYear(){
+	private void calculateVersionsPerYear(){
 		int yearCounter=1;
 		int currPos=-1;/*me auth th metavlhth tha vroume poso xwro tha exei
 		o pinakas versionsPerYear*/
@@ -258,8 +269,8 @@ public class Workspace {
 	public void setUpLaw7(){
 		laws.add(6,new Law("Law 7"));
 		//TODO Is automated?
-		if(laws.get(2).isAccepted()&&laws.get(6).isAccepted()){
-			laws.get(7).setAccepted(true);
+		if(laws.get(1).isAccepted()&&laws.get(5).isAccepted()){
+			laws.get(6).setAccepted(true);
 		}
 	}
 	
