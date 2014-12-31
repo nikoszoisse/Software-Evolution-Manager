@@ -8,32 +8,35 @@ public class Workspace {
 	private ArrayList<Law> laws=new ArrayList();
 	private int initOpNum;
 	private int initDataStructuresNum;
-	private float[] opPerVersion,dataPerVersion;
-	private float[] opRateOfGrowth;
-	private float[] dataRateOfGrowth;
-	private float[] opRateOfWork;
-	private float[] dataRateOfWork;
-	private float[] opComplexities,dataComplexities;
-	private float[] opChanges,dataChanges;
-	private float[] versionsPerYear;
-	private float[] maintainancePerVersion;
-	private int[] versionsId,year;
+	double[] opPerVersion;
+	private double[] dataPerVersion;
+	private double[] opRateOfGrowth;
+	private double[] dataRateOfGrowth;
+	private double[] opRateOfWork;
+	private double[] dataRateOfWork;
+	private double[] opComplexities,dataComplexities;
+	double[] opChanges;
+	private double[] dataChanges;
+	private double[] versionsPerYear;
+	private double[] maintainancePerVersion;
+	double[] versionsId;
+	private double[] year;
 	
 	public Workspace(String title,ArrayList<Version> version){
 		this.title = title;
 		this.versions=version;
-		opPerVersion=new float[versions.size()];
-		dataPerVersion=new float[versions.size()];
-		opRateOfGrowth=new float[versions.size()];
-		dataRateOfGrowth=new float[versions.size()];
-		opRateOfWork=new float[versions.size()];
-		dataRateOfWork=new float[versions.size()];
-		opComplexities=new float[versions.size()];
-		dataComplexities=new float[versions.size()];
-		opChanges=new float[versions.size()];
-		dataChanges=new float[versions.size()];
-		maintainancePerVersion=new float[versions.size()];
-		versionsId=new int[versions.size()];
+		opPerVersion=new double[versions.size()];
+		dataPerVersion=new double[versions.size()];
+		opRateOfGrowth=new double[versions.size()];
+		dataRateOfGrowth=new double[versions.size()];
+		opRateOfWork=new double[versions.size()];
+		dataRateOfWork=new double[versions.size()];
+		opComplexities=new double[versions.size()];
+		dataComplexities=new double[versions.size()];
+		opChanges=new double[versions.size()];
+		dataChanges=new double[versions.size()];
+		maintainancePerVersion=new double[versions.size()];
+		versionsId=new double[versions.size()];
 	}
 	
 	public void initialize(){
@@ -136,7 +139,7 @@ public class Workspace {
 			}
 			tempArray[currPos]=yearCounter;
 		}
-		versionsPerYear=new float[currPos+1];
+		versionsPerYear=new double[currPos+1];
 		for(int i=0;i<=currPos;i++){
 			versionsPerYear[i]=tempArray[i];
 		}
@@ -166,20 +169,25 @@ public class Workspace {
 		chartType.add(ChartType.CHART_BARS);
 		chartType.add(ChartType.CHART_BARS);
 		chartType.add(ChartType.CHART_BARS);
-		String[] labelY=new String[2];
+		String[] labelY=new String[3];
 		labelY[0]="number of Changes";
 		labelY[1]="number of Versions";
+		labelY[2]="Chart label 3 Y";
 		String[] labelX=new String[2];
 		labelX[0]="Versions Id";
 		labelX[1]="Year";
-		ArrayList<int[]> valuesX=new ArrayList();
-		ArrayList<float[]> valuesY=new ArrayList();
+		labelX[2]="Chart label 3 X";
+		//TODO String laber gia to 3o charts?
+		ArrayList<double[]> valuesX=new ArrayList();
+		ArrayList<double[]> valuesY=new ArrayList();
 		valuesY.add(opChanges);
 		valuesY.add(dataChanges);
 		valuesY.add(versionsPerYear);
 		valuesX.add(versionsId);
 		valuesX.add(year);
-		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,2));
+		//TODO EDW den exei values x ia to 3o chart?
+		valuesX.add(year);
+		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,3));
 		
 	}
 	
@@ -192,8 +200,8 @@ public class Workspace {
 		labelY[1]="number of actions";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<int[]> valuesX=new ArrayList();
-		ArrayList<float[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList();
+		ArrayList<double[]> valuesY=new ArrayList();
 		valuesX.add(versionsId);
 		valuesY.add(opComplexities);
 		valuesY.add(dataComplexities);
@@ -209,8 +217,8 @@ public class Workspace {
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<int[]> valuesX=new ArrayList();
-		ArrayList<float[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList();
+		ArrayList<double[]> valuesY=new ArrayList();
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfGrowth);
 		valuesY.add(dataRateOfGrowth);
@@ -225,8 +233,8 @@ public class Workspace {
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<int[]> valuesX=new ArrayList();
-		ArrayList<float[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList();
+		ArrayList<double[]> valuesY=new ArrayList();
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfWork);
 		valuesY.add(dataRateOfWork);
@@ -241,8 +249,8 @@ public class Workspace {
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<int[]> valuesX=new ArrayList();
-		ArrayList<float[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList();
+		ArrayList<double[]> valuesY=new ArrayList();
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfGrowth);
 		valuesY.add(dataRateOfGrowth);
@@ -258,8 +266,8 @@ public class Workspace {
 		labelY[1]="number of DataStructures";
 		String[] labelX=new String[1];
 		labelX[0]="Version Id";
-		ArrayList<int[]> valuesX=new ArrayList();
-		ArrayList<float[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList();
+		ArrayList<double[]> valuesY=new ArrayList();
 		valuesX.add(versionsId);
 		valuesY.add(opPerVersion);
 		valuesY.add(dataPerVersion);
@@ -281,28 +289,28 @@ public class Workspace {
 		//TODO LAW 8
 	}
 	
-	public float[] getOpComplexities(){
+	public double[] getOpComplexities(){
 		return this.opComplexities;
 	}
-	public float[] getDataComplexities(){
+	public double[] getDataComplexities(){
 		return this.dataComplexities;
 	}
-	public float[] getOpRateOfGrowth(){
+	public double[] getOpRateOfGrowth(){
 		return this.opRateOfGrowth;
 	}
-	public float[] getDataRateOfGrowth(){
+	public double[] getDataRateOfGrowth(){
 		return this.dataRateOfGrowth;
 	}
-	public float[] getOpRateOfWork(){
+	public double[] getOpRateOfWork(){
 		return this.opRateOfWork;
 	}
-	public float[] getDataRateOfWork(){
+	public double[] getDataRateOfWork(){
 		return this.dataRateOfWork;
 	}
-	public float[] getOpChanges(){
+	public double[] getOpChanges(){
 		return this.opChanges;
 	}
-	public float[] getDataChanges(){
+	public double[] getDataChanges(){
 		return this.dataChanges;
 	}
 	

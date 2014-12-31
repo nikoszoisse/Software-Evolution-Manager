@@ -6,15 +6,15 @@ public class Law {
 	private String[] labelX,labelY;
 	private ArrayList<Integer> dependedEvalLaws;
 	private ArrayList<ChartType> chartTypes;
-	private ArrayList<int[]> valuesX;
-	private ArrayList<float[]> valuesY;
+	private ArrayList<double[]> valuesX;
+	private ArrayList<double[]> valuesY;
 	private int numOfCharts;
 	private boolean accepted;
 	private boolean lawChecked;
 	private String comment;
 	
 	public Law(String name,String[] labelX, String[] labelY,ArrayList<ChartType> chartTypes,
-			ArrayList<int[]> valuesX,ArrayList<float[]> valuesY,int num_of_charts) {
+			ArrayList<double[]> valuesX,ArrayList<double[]> valuesY,int num_of_charts) {
 		super();
 		this.name = name;
 		this.labelX = labelX;
@@ -34,6 +34,7 @@ public class Law {
 	public Law(String name) {
 		this.name = name;
 		this.lawChecked = false;
+		this.dependedEvalLaws = new ArrayList<Integer>();
 	}
 
 	public void addDependedLaw(Integer law){
@@ -92,5 +93,12 @@ public class Law {
 		this.name = name;
 	}
 	
+	public double[] getChartValuesX(int index){
+		return this.valuesX.get(index);
+	}
+	
+	public double[] getChartValuesY(int index){
+		return this.valuesY.get(index);
+	}
 
 }
