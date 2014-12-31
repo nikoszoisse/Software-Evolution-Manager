@@ -17,6 +17,7 @@ public class AppManager {
 	public void initialize(){
 		view_engine = new ViewEngine(this);
 		parser_controller = new ParserController(this);
+		history_report = new HistoryReportEngine();
 		view_engine.initialize();
 	}
 	
@@ -68,5 +69,4 @@ public class AppManager {
 		//TODO ADD IT TO LLIST
 		this.view_engine.addTab(ret_workspace);
 	}
-	
 }

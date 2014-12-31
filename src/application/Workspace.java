@@ -269,6 +269,9 @@ public class Workspace {
 	public void setUpLaw7(){
 		laws.add(6,new Law("Law 7"));
 		//TODO Is automated?
+		laws.get(6).addDependedLaw(2);
+		laws.get(6).addDependedLaw(6);
+		
 		if(laws.get(1).isAccepted()&&laws.get(5).isAccepted()){
 			laws.get(6).setAccepted(true);
 		}
