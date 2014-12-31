@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Law {
 	
 	private String[] labelX,labelY;
+	private ArrayList<Law> dependedEvalLaws;
 	private ArrayList<ChartType> chartTypes;
 	private ArrayList<int[]> valuesX;
 	private ArrayList<float[]> valuesY;
@@ -21,12 +22,20 @@ public class Law {
 		this.valuesX=valuesX;
 		this.valuesY=valuesY;
 		this.numOfCharts = num_of_charts;
+		this.dependedEvalLaws = new ArrayList<Law>();
 	}
 	
 	public Law(){//constuctor gia laws xwris grafikes parastaseis 
 		super();
 	}
 	
+	public void addDependedLaw(Law law){
+		this.dependedEvalLaws.add(law);
+	}
+	
+	public ArrayList<Law> getDependedLaws(){
+		return dependedEvalLaws;
+	}
 	public String getChartLabelX(int index) {
 		return labelX[index];
 	}
