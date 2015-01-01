@@ -150,7 +150,8 @@ public class LawDialog extends JDialog {
 	}
 	
 	private void setUpCharts() {
-		for(int i=0;i<law.getNum_of_charts();i++){
+		int num_of_charts = law.getNum_of_charts();
+		for(int i=0;i<num_of_charts;i++){
 			JFreeChart chart = null;
 			if(law.getChart(i) == ChartType.CHART_LINES){
 				chart = newLineChart(i);
@@ -160,7 +161,9 @@ public class LawDialog extends JDialog {
 			}
 			
 			ChartPanel chart_panel = new ChartPanel(chart);
+			chart_panel.setPreferredSize(new Dimension(chartPane.getWidth()/num_of_charts,chartPane.getHeight()/2));
 			this.chartPane.add(chart_panel);
+			
 		}
 		
 	}
@@ -168,7 +171,7 @@ public class LawDialog extends JDialog {
 	private JFreeChart newBarChart(int i) {
 		DefaultXYDataset data_set = new DefaultXYDataset();
 		 double data[][] = {law.getChartValuesX(i),law.getChartValuesY(i)};
-		 data_set.addSeries(null, data);
+		 data_set.addSeries("", data);
 		 
 		IntervalXYDataset dataset = new XYBarDataset(data_set, 1.0);
 		JFreeChart chart = 
@@ -179,7 +182,7 @@ public class LawDialog extends JDialog {
 	private JFreeChart newLineChart(int i) {
 		DefaultXYDataset data_set = new DefaultXYDataset();
 		 double data[][] = {law.getChartValuesX(i),law.getChartValuesY(i)};
-		 data_set.addSeries(null, data);
+		 data_set.addSeries("", data);
 		 JFreeChart chart = 
 				 ChartFactory.createXYLineChart("Test Chart",
 				                 law.getChartLabelX(i), law.getChartLabelY(i), data_set,
