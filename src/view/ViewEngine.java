@@ -213,7 +213,7 @@ public class ViewEngine {
 	 */
 	public void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 900, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.initMenuBar();
 		this.initializeTabPane();

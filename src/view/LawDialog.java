@@ -1,13 +1,15 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -29,6 +31,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYBarDataset;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class LawDialog extends JDialog {
 	
@@ -56,22 +60,22 @@ public class LawDialog extends JDialog {
 	public LawDialog(Law law,Frame owner) {
 		super(owner, "Αποτίμιση "+law.getLawName());
 		this.law = law;
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 900, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JLabel label = new JLabel("Αποδοχή Νόμου:");
-		label.setBounds(249, 168, 110, 14);
+		label.setBounds(512, 442, 110, 14);
 		contentPanel.add(label);
 		
 		JRadioButton radioButton = new JRadioButton("Ναι");
-		radioButton.setBounds(248, 181, 50, 24);
+		radioButton.setBounds(511, 455, 50, 24);
 		contentPanel.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("Όχι");
-		radioButton_1.setBounds(302, 181, 57, 24);
+		radioButton_1.setBounds(565, 455, 57, 24);
 		contentPanel.add(radioButton_1);
 	    
 		ButtonGroup group = new ButtonGroup();
@@ -79,21 +83,43 @@ public class LawDialog extends JDialog {
 	    group.add(radioButton_1);
 	    
 	    JLabel label_1 = new JLabel("Σχόλιο:");
-	    label_1.setBounds(12, 140, 55, 16);
+	    label_1.setBounds(149, 397, 55, 16);
 	    contentPanel.add(label_1);
 	    
 	    JTextArea textArea = new JTextArea();
 	    textArea.setToolTipText("κάντε κλικ για να προσθεστε ένα σχόλιο εδώ..");
 	    textArea.setLineWrap(true);
-	    textArea.setBounds(12, 168, 201, 56);
+	    textArea.setBorder(new LineBorder(Color.GRAY));
+	    textArea.setBounds(149, 425, 286, 101);
 	    contentPanel.add(textArea);
 	    
 	    chartPane = new JPanel();
-	    chartPane.setBounds(12, 10, 412, 135);
+	    chartPane.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+	    chartPane.setBounds(12, 10, 860, 378);
 	    contentPanel.add(chartPane);
 	    /*SET UP Charts if exists*/
 	    if(law.getNum_of_charts() > 0)
 	    	setUpCharts();
+	    //TODO Remove them
+	    DefaultXYDataset data_set = new DefaultXYDataset();
+		 double data[][] = {{1,2,3,4},{3,4,5,6}};
+		 data_set.addSeries("Sieries not null", data);
+		 JFreeChart chart = 
+				 ChartFactory.createXYLineChart("Test Chart",
+				                 "Label x", "Label y", data_set,
+				                 PlotOrientation.VERTICAL, true, true, false);
+
+		ChartPanel chart_panel = new ChartPanel(chart);
+		ChartPanel chart_panel_1 = new ChartPanel(chart);
+		ChartPanel chart_panel_2 = new ChartPanel(chart);
+		chart_panel.setPreferredSize(new Dimension(chartPane.getWidth()/3,chartPane.getHeight()/2));
+		chart_panel_1.setPreferredSize(new Dimension(chartPane.getWidth()/3,chartPane.getHeight()/2));
+		chart_panel_2.setPreferredSize(new Dimension(chartPane.getWidth()/3,chartPane.getHeight()/2 - 15));
+		this.chartPane.add(chart_panel);
+		this.chartPane.add(chart_panel_1);
+		this.chartPane.add(chart_panel_2);
+		//TODO TILL HERE DELETE
+	    
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
