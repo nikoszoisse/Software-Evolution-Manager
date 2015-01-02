@@ -53,6 +53,8 @@ public class ViewEngine implements ActionListener{
 		
 		int tab_index = this.tabbedPane.getTabCount()-1;
 		initTabComponent(tab_index,this.tabbedPane);
+		
+		this.tabbedPane.setSelectedIndex(tab_index);
 	}
 	
 	public void closeTab(){
@@ -119,7 +121,14 @@ public class ViewEngine implements ActionListener{
 		
 		LawDialog dialog = new LawDialog(current_tab_wrokspace.getLaw(law_num), this.frmProjectSem);
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
+		int ret_value = dialog.showLawDialog();
+		
+		if(ret_value == LawDialog.OK_BUTTON){
+			System.out.println("Ok Pressed Man");
+			current_tab.updatePanel();
+		}else{
+			System.out.println("Canceled");
+		}
 	}
 	
 	/**
@@ -278,7 +287,7 @@ public class ViewEngine implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()){
-		case  "open_file": addTab(new Workspace("TestWorkspace", new ArrayList<Version>()));/*this.createOpenFileDialog();*/break;
+		case  "open_file": this.createOpenFileDialog();break;
 		case "create_report": this.createReportFileDialog();break;
 		case "law_1" :this.viewLaw(1);break;
 		case "law_2" :this.viewLaw(2);break;
@@ -288,6 +297,7 @@ public class ViewEngine implements ActionListener{
 		case "law_6" :this.viewLaw(6);break;
 		case "law_7" :this.viewLaw(7);break;
 		case "law_8" :this.viewLaw(8);break;
+		case "help_about": break;
 		default: System.out.println(e.getActionCommand()+" Need creation first");
 		}
 		

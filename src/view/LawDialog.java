@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
 import application.ChartType;
@@ -31,10 +32,11 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYBarDataset;
+
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-public class LawDialog extends JDialog {
+public class LawDialog extends JDialog implements ActionListener{
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,16 +51,21 @@ public class LawDialog extends JDialog {
 			}
 		});
 	}
-
+	static public final int OK_BUTTON = 1;
+	static public final int CANCEL_BUTTON = 2;
+	private int choosen_button = -1;
 	private final JPanel contentPanel =  new JPanel();
 	private JPanel chartPane;
 	private Law law;
+	private JTextArea textArea;
+	private ButtonGroup group;
 
 	/**
 	 * Create the dialog.
 	 */
 	public LawDialog(Law law,Frame owner) {
 		super(owner, "Αποτίμιση "+law.getLawName());
+		setModal(true);
 		this.law = law;
 		setBounds(100, 100, 900, 600);
 		getContentPane().setLayout(new BorderLayout());
@@ -72,13 +79,17 @@ public class LawDialog extends JDialog {
 		
 		JRadioButton radioButton = new JRadioButton("Ναι");
 		radioButton.setBounds(511, 455, 50, 24);
+		radioButton.setActionCommand("yes");
+		
 		contentPanel.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("Όχι");
 		radioButton_1.setBounds(565, 455, 57, 24);
+		radioButton_1.setActionCommand("no");
+		
 		contentPanel.add(radioButton_1);
 	    
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 	    group.add(radioButton);
 	    group.add(radioButton_1);
 	    
@@ -86,7 +97,7 @@ public class LawDialog extends JDialog {
 	    label_1.setBounds(149, 397, 55, 16);
 	    contentPanel.add(label_1);
 	    
-	    JTextArea textArea = new JTextArea();
+	    textArea = new JTextArea();
 	    textArea.setToolTipText("κάντε κλικ για να προσθεστε ένα σχόλιο εδώ..");
 	    textArea.setLineWrap(true);
 	    textArea.setBorder(new LineBorder(Color.GRAY));
@@ -126,18 +137,8 @@ public class LawDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
-				okButton.setEnabled(false);
 				okButton.setActionCommand("OK");
-				okButton.addActionListener(new ActionListener(){
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						//if(comment null)
-						//Warning message
-						//else
-						//law.setcomment
-						//law.setaccepted(true);
-					}
-				});
+				okButton.addActionListener(this);
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
@@ -147,6 +148,7 @@ public class LawDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
 	}
 	
 	private void setUpCharts() {
@@ -200,5 +202,47 @@ public class LawDialog extends JDialog {
 			    message,
 			    "Opps error",
 			    JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		switch(e.getActionCommand()){
+		case "OK": saveLawState();this.choosen_button = LawDialog.OK_BUTTON;break;
+		}
+		
+	}
+
+	@SuppressWarnings("deprecation")
+	private void saveLawState() {
+		/*Check if user checked Yes Or NO option*/
+		if(group.getSelection() == null){
+			showErrorDialog("You must select 'Yes' or 'No'!!");
+			return;
+		}
+		
+		if(this.textArea.getText().isEmpty()){
+			//WARNING
+			int dialogResult = JOptionPane.showConfirmDialog (this, "Would You Like to Save your Previous Note First?",
+					"Warning",JOptionPane.YES_NO_OPTION);
+			if(dialogResult ==JOptionPane.NO_OPTION)
+				return;		
+		}else{
+			this.law.setComment(this.textArea.getText());
+		}
+		
+		/*updae law if accepted or not*/
+		String selected_radio = group.getSelection().getActionCommand();
+		switch(selected_radio){
+		case "yes": this.law.setAccepted(true);break;
+		case "no": this.law.setAccepted(false);break;
+		}
+		
+		this.dispose();
+	}
+	
+	public int showLawDialog(){
+		this.setVisible(true);
+		
+		return choosen_button;	
 	}
 }

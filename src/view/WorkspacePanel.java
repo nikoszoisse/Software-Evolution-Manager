@@ -39,29 +39,6 @@ public class WorkspacePanel extends JPanel {
 		add(progressBar);
 		progressBar.setForeground(Color.RED);
 		progressBar.setMaximum(8);
-		//TODO REMOVE THREAD because is just game
-		Thread thread = new Thread(){
-			public void run(){
-				int value = 0;
-				while(true){
-					progressBar.setForeground(Color.RED);
-					value++;
-					progressBar.setValue(value);
-					if(value == 8){
-						progressBar.setForeground(Color.GREEN);
-						value=0;
-					}
-					try {
-						sleep(2000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		thread.start();
-
 	}
 	
 	public void updatePanel(){
