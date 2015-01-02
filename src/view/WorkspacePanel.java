@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
@@ -9,6 +8,7 @@ import application.Workspace;
 
 import java.awt.Color;
 import java.awt.Label;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class WorkspacePanel extends JPanel {
@@ -20,29 +20,47 @@ public class WorkspacePanel extends JPanel {
 	 */
 	public WorkspacePanel(Workspace workspace) {
 		this.workspace = workspace;
-		setLayout(null);
+		setLayout(new FlowLayout(FlowLayout.CENTER, 900, 30));
 		
 		JLabel label = new JLabel("Όνομα αρχείου: "+workspace.getTitle());
-		label.setBounds(27, 47, 251, 14);
 		add(label);
 		
 		JLabel label_1 = new JLabel("Αρ. Εκδόσεων: "+workspace.getNumOfVersions());
-		label_1.setBounds(27, 91, 173, 16);
 		add(label_1);
 		
-		this.progressBar = new JProgressBar();
-		progressBar.setForeground(Color.RED);
-		progressBar.setMaximum(8);
-		progressBar.setBounds(265, 237, 148, 14);
-		add(progressBar);
+		Label guide_step = new Label("Start by Evaluating the Laws on Menu->\"Tools->Evaluate Laws\"");
+		add(guide_step);
 		
 		this.lblEvaluatedLawsX = new JLabel("Evaluated Laws: 0/8");
-		lblEvaluatedLawsX.setBounds(265, 209, 128, 16);
 		add(lblEvaluatedLawsX);
 		
-		Label guide_step = new Label("Start by Evaluating the Laws on Menu->\"Tools->Evaluate Laws\"");
-		guide_step.setBounds(27, 140, 354, 23);
-		add(guide_step);
+		this.progressBar = new JProgressBar();
+		progressBar.setStringPainted(true);
+		add(progressBar);
+		progressBar.setForeground(Color.RED);
+		progressBar.setMaximum(8);
+		//TODO REMOVE THREAD because is just game
+		Thread thread = new Thread(){
+			public void run(){
+				int value = 0;
+				while(true){
+					progressBar.setForeground(Color.RED);
+					value++;
+					progressBar.setValue(value);
+					if(value == 8){
+						progressBar.setForeground(Color.GREEN);
+						value=0;
+					}
+					try {
+						sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		thread.start();
 
 	}
 	
