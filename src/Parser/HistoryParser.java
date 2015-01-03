@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -43,14 +44,8 @@ public class HistoryParser implements Parser{
     private int dataStructuresUpd;
 	private String errors;
 
-    public HistoryParser (Path file) {
-	historyFile = file;
-	readFile ();
+    public HistoryParser () {
     }
-
-    public HistoryParser() {
-		// TODO Please follow the report
-	}
 
 	public ArrayList <Version> readFile () {
 	ArrayList <Version> versions =  new ArrayList <Version> ();
@@ -97,7 +92,7 @@ public class HistoryParser implements Parser{
 	    }
 	    System.out.println (softwareName);
 	} catch (IOException e) {
-		
+		this.setError(e.getMessage());
 	    System.err.format ("IOException: %s%n", e);
 	}
 	return versions;
@@ -105,20 +100,30 @@ public class HistoryParser implements Parser{
 
 	@Override
 	public Workspace requestWorkspace() {
-		// TODO Please Fix them
-		this.setError("request Workspace doesnt works");
+		if(this.historyFile == null){
+			this.setError("File not opened!");
+			return null;
+		}
+		
+		ArrayList<Version> versions = this.readFile();
+		if(this.errors == null)
+			return new Workspace(softwareName, versions);
+
 		return null;
 	}
 
 	@Override
-	public void openFile(String file_path) {
-		// TODO Please fix them.
-		
+	public void openFile(Path file_path) {
+		try{
+			this.historyFile = file_path;
+		}catch(InvalidPathException e){
+			e.printStackTrace();
+			this.setError(e.getReason());
+		}
 	}
 
 	@Override
 	public String getErrors() {
-		// TODO Auto-generated method stub
 		return errors;
 	}
 	
@@ -128,11 +133,9 @@ public class HistoryParser implements Parser{
 	 */
 	@Override
 	public void setError(String error_message) {
-		// TODO Auto-generated method stub
 		if(errors == null)
 			errors=error_message;
 		else
 			errors+=", "+error_message;
-		//Initialize a variable String Errors
 	}
 }

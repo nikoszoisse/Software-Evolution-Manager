@@ -1,5 +1,7 @@
 package Parser;
 
+import java.nio.file.Path;
+
 import application.AppManager;
 import application.Workspace;
 
@@ -17,16 +19,19 @@ public class ParserController {
 	 * @param file_path
 	 * @return Workspace if generated succesfully
 	 */
-	public void generateWorkspaceFromFile(String file_path){ 
+	public void generateWorkspaceFromFile(Path file_path){ 
 		
-		int dot = file_path.lastIndexOf(".");
-		String file_extension = file_path.substring(dot + 1);
+		String path = file_path.toString();
+		
+		int dot = path.lastIndexOf(".");
+		String file_extension = path.substring(dot + 1);
 		
 		Parser used_parser = chooseParser(file_extension);
 		if(used_parser == null){
 			app.setError("This file Extension does not supported in this version");
 		}
 		else{
+			used_parser.openFile(file_path);
 			Workspace ret_workspace = used_parser.requestWorkspace();
 			
 			if(used_parser.getErrors() != null)

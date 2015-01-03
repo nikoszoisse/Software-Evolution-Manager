@@ -1,7 +1,6 @@
 ﻿package application;
 
 public class Version {
-	//TODO initialize the fields
 	private String softwareName,date;
 	private int initOp,initData,operationsNumber,dataStructuresNumber,id;
 	private int opAdded,opDeleted,opUpdated;
@@ -15,7 +14,6 @@ public class Version {
 			int id, String date, int opAdd,
 			int opDel, int opUpd, int dataStructuresAdd, int dataStructuresDel,
 			int dataStructuresUpd) {
-		// TODO Auto-generated constructor stub
 		this.softwareName=softwareName;
 		this.id=id;
 		this.date=date;

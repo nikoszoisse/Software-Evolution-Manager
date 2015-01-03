@@ -1,11 +1,10 @@
 package application;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Workspace {
 	private String title = "A Workspace";
 	private ArrayList<Version> versions;
-	private ArrayList<Law> laws=new ArrayList();
+	private ArrayList<Law> laws=new ArrayList<Law>();
 	private int initOpNum;
 	private int initDataStructuresNum;
 	private double[] opPerVersion;
@@ -39,6 +38,9 @@ public class Workspace {
 		maintainancePerVersion=new double[versions.size()];
 		versionsId=new double[versions.size()];
 		SFuturePerVersion=new double[getNumOfVersions()];
+		
+		this.initialize();
+		this.setUpLaws();
 	}
 	
 	public void initialize(){
@@ -51,6 +53,17 @@ public class Workspace {
 		this.calculateMaintainance();
 		this.calculateVersionsPerYear();
 		this.computeFormulaPerVerion();
+	}
+	
+	public void setUpLaws(){
+		this.setUpLaw1();
+		this.setUpLaw2();
+		this.setUpLaw3();
+		this.setUpLaw4();
+		this.setUpLaw5();
+		this.setUpLaw6();
+		this.setUpLaw7();
+		this.setUpLaw8();
 	}
 	
 	public Law getLaw(int index){
@@ -204,9 +217,8 @@ public class Workspace {
 		return message;
 	}
 	
-	public void setUpLaw1(){
-		ArrayList<ChartType> chartType =new ArrayList();
-		//TODO private oles oi alles methodoi ??? @NIKOS nai!!
+	private void setUpLaw1(){
+		ArrayList<ChartType> chartType =new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_BARS);
 		chartType.add(ChartType.CHART_BARS);
 		chartType.add(ChartType.CHART_BARS);
@@ -218,22 +230,20 @@ public class Workspace {
 		labelX[0]="Versions Id";
 		labelX[1]="Version Id";
 		labelX[2]="Year";
-		//TODO String laber gia to 3o charts?
-		ArrayList<double[]> valuesX=new ArrayList();
-		ArrayList<double[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList<double[]>();
+		ArrayList<double[]> valuesY=new ArrayList<double[]>();
 		valuesY.add(opChanges);
 		valuesY.add(dataChanges);
 		valuesY.add(versionsPerYear);
 		valuesX.add(versionsId);
 		valuesX.add(versionsId);
 		valuesX.add(year);
-		//TODO EDW den exei values x ia to 3o chart?
 		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,3));
 		
 	}
 	
-	public void setUpLaw2(){
-		ArrayList<ChartType> chartType =new ArrayList();
+	private void setUpLaw2(){
+		ArrayList<ChartType> chartType =new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_LINES);
 		chartType.add(ChartType.CHART_BARS);
 		String[] labelY=new String[2];
@@ -241,8 +251,8 @@ public class Workspace {
 		labelY[1]="number of actions";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<double[]> valuesX=new ArrayList();
-		ArrayList<double[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList<double[]>();
+		ArrayList<double[]> valuesY=new ArrayList<double[]>();
 		valuesX.add(versionsId);
 		valuesY.add(opComplexities);
 		valuesY.add(dataComplexities);
@@ -250,56 +260,56 @@ public class Workspace {
 		laws.add(1,new Law("Law 2",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void setUpLaw3(){
-		ArrayList<ChartType> chartType =new ArrayList();
+	private void setUpLaw3(){
+		ArrayList<ChartType> chartType =new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_LINES);
 		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[1];
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<double[]> valuesX=new ArrayList();
-		ArrayList<double[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList<double[]>();
+		ArrayList<double[]> valuesY=new ArrayList<double[]>();
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfGrowth);
 		valuesY.add(dataRateOfGrowth);
 		laws.add(2,new Law("Law 3",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void setUpLaw4(){
-		ArrayList<ChartType> chartType =new ArrayList();
+	private void setUpLaw4(){
+		ArrayList<ChartType> chartType =new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_LINES);
 		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[1];
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<double[]> valuesX=new ArrayList();
-		ArrayList<double[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList<double[]>();
+		ArrayList<double[]> valuesY=new ArrayList<double[]>();
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfWork);
 		valuesY.add(dataRateOfWork);
 		laws.add(3,new Law("Law 4",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void setUpLaw5(){//Epanalhpsh Kwdika
-		ArrayList<ChartType> chartType =new ArrayList();
+	private void setUpLaw5(){//Epanalhpsh Kwdika
+		ArrayList<ChartType> chartType =new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_LINES);
 		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[1];
 		labelY[0]="RateOfGrowth";
 		String[] labelX=new String[1];
 		labelX[0]="versionsId";
-		ArrayList<double[]> valuesX=new ArrayList();
-		ArrayList<double[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList<double[]>();
+		ArrayList<double[]> valuesY=new ArrayList<double[]>();
 		valuesX.add(versionsId);
 		valuesY.add(opRateOfGrowth);
 		valuesY.add(dataRateOfGrowth);
 		laws.add(4,new Law("Law 5",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void setUpLaw6(){
-		ArrayList<ChartType> chartType =new ArrayList();
+	private void setUpLaw6(){
+		ArrayList<ChartType> chartType =new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_LINES);
 		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[2];
@@ -307,17 +317,16 @@ public class Workspace {
 		labelY[1]="number of DataStructures";
 		String[] labelX=new String[1];
 		labelX[0]="Version Id";
-		ArrayList<double[]> valuesX=new ArrayList();
-		ArrayList<double[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList<double[]>();
+		ArrayList<double[]> valuesY=new ArrayList<double[]>();
 		valuesX.add(versionsId);
 		valuesY.add(opPerVersion);
 		valuesY.add(dataPerVersion);
 		laws.add(5,new Law("Law 6",labelX,labelY,chartType,valuesX,valuesY,2));
 	}
 	
-	public void setUpLaw7(){
+	private void setUpLaw7(){
 		laws.add(6,new Law("Law 7"));
-		//TODO Is automated?
 		laws.get(6).addDependedLaw(2);
 		laws.get(6).addDependedLaw(6);
 		
@@ -326,20 +335,19 @@ public class Workspace {
 		}
 	}
 	
-	public void setUpLaw8(){
-		ArrayList<ChartType> chartType=new ArrayList();
+	private void setUpLaw8(){
+		ArrayList<ChartType> chartType=new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_LINES);
 		String[] labelY=new String[1];
 		labelY[0]="Number of Operations";
 		String[] labelX= new String[1];
 		labelX[0]="Version Id";
-		ArrayList<double[]> valuesX=new ArrayList();
-		ArrayList<double[]> valuesY=new ArrayList();
+		ArrayList<double[]> valuesX=new ArrayList<double[]>();
+		ArrayList<double[]> valuesY=new ArrayList<double[]>();
 		valuesX.add(versionsId);
 		valuesY.add(SFuturePerVersion);
 		valuesY.add(opPerVersion);
 		laws.add(7,new Law("Law 8",labelX,labelY,chartType,valuesX,valuesY,1));
-		
 	}
 	
 	public double[] getOpComplexities(){

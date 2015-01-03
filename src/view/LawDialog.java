@@ -176,17 +176,31 @@ public class LawDialog extends JDialog implements ActionListener{
 		 data_set.addSeries("", data);
 		 
 		IntervalXYDataset dataset = new XYBarDataset(data_set, 1.0);
+		
+		String chart_title = law.getChartLabelX(i)+","+law.getChartLabelY(i);
+		
 		JFreeChart chart = 
-				 ChartFactory.createXYBarChart(null, law.getChartLabelX(i), true, law.getChartLabelY(i), dataset);
+				 ChartFactory.createXYBarChart(chart_title, law.getChartLabelX(i), true, law.getChartLabelY(i), dataset);
 		 return chart;
 	}
 
 	private JFreeChart newLineChart(int i) {
+		String seriesKey;
 		DefaultXYDataset data_set = new DefaultXYDataset();
 		 double data[][] = {law.getChartValuesX(i),law.getChartValuesY(i)};
-		 data_set.addSeries("", data);
+		 seriesKey = law.getChartLabelX(i)+","+law.getChartLabelY(i);
+		 data_set.addSeries(seriesKey, data);
+		 //Special case for Law 8
+		 //has 2 series
+		 if(law.getLawName() == "Law 8"){
+			 double data1[][] = {law.getChartValuesX(i),law.getChartValuesY(i+1)};
+			 seriesKey = law.getChartLabelX(i)+","+law.getChartLabelY(i+1);
+			 data_set.addSeries(seriesKey, data1);
+		 }
+		 
+		 String chart_title = law.getChartLabelX(i)+","+law.getChartLabelY(i);
 		 JFreeChart chart = 
-				 ChartFactory.createXYLineChart("Test Chart",
+				 ChartFactory.createXYLineChart(chart_title,
 				                 law.getChartLabelX(i), law.getChartLabelY(i), data_set,
 				                 PlotOrientation.VERTICAL, true, true, false);
 		 return chart;
@@ -212,7 +226,6 @@ public class LawDialog extends JDialog implements ActionListener{
 		
 	}
 
-	@SuppressWarnings("deprecation")
 	private void saveLawState() {
 		/*Check if user checked Yes Or NO option*/
 		if(group.getSelection() == null){

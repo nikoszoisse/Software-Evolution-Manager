@@ -1,5 +1,7 @@
 package application;
 
+import java.nio.file.Path;
+
 import report.HistoryReportEngine;
 import Parser.ParserController;
 import view.ViewEngine;
@@ -27,7 +29,7 @@ public class AppManager {
 	 * @param file_path
 	 * @throws InterruptedException
 	 */
-	public void parseFileProcedure(final String file_path) throws InterruptedException {
+	public void parseFileProcedure(final Path file_path) throws InterruptedException {
 		Thread th = new Thread(){
 			public void run(){
 				parser_controller.generateWorkspaceFromFile(file_path);

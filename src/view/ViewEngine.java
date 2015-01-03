@@ -26,6 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 
@@ -73,11 +74,10 @@ public class ViewEngine implements ActionListener{
 	    if(returnVal == JFileChooser.APPROVE_OPTION) {
 	    	//Tell to AppManager to handle the file and parse it!
 	    	try {
-	    		String file_path = chooser.getSelectedFile().getAbsolutePath();
+	    		Path file_path = chooser.getSelectedFile().toPath();
 				app.parseFileProcedure(file_path);
 				
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    	
@@ -96,8 +96,6 @@ public class ViewEngine implements ActionListener{
 			law_num++;
 		}
 		String tab_type = this.tabbedPane.getSelectedComponent().getClass().getName();
-		//TODO remove it when public
-		System.out.println(tab_type);
 		
 		/*Check if History file selected*/
 		if(tab_type != "view.WorkspacePanel"){
