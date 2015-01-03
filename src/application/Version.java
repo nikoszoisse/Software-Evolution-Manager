@@ -28,7 +28,7 @@ public class Version {
 		this.dataStructuresUpdated=dataStructuresUpd;
 		this.dataStructuresDeleted=dataStructuresDel;
 		calculateComplexities();
-		setDayYearMonth(date);
+		setDayYearMonth();
 	}
 	
 	private void calculateComplexities(){
@@ -71,7 +71,7 @@ public class Version {
 		return mantainance;
 	}
 	
-	private void setDayYearMonth(String date){
+	private void setDayYearMonth(){
 		String[] versDate=date.split("/");
 		this.day=Integer.parseInt(versDate[0]);
 		this.month=Integer.parseInt(versDate[1]);

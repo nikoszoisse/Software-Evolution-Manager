@@ -27,10 +27,6 @@ public class Law {
 		this.lawChecked = false;
 	}
 	
-	public Law(){//constuctor gia laws xwris grafikes parastaseis 
-		super();
-	}
-	
 	public Law(String name) {
 		this.name = name;
 		this.lawChecked = false;

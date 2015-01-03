@@ -8,19 +8,20 @@ public class Workspace {
 	private ArrayList<Law> laws=new ArrayList();
 	private int initOpNum;
 	private int initDataStructuresNum;
-	double[] opPerVersion;
+	private double[] opPerVersion;
 	private double[] dataPerVersion;
 	private double[] opRateOfGrowth;
 	private double[] dataRateOfGrowth;
 	private double[] opRateOfWork;
 	private double[] dataRateOfWork;
 	private double[] opComplexities,dataComplexities;
-	double[] opChanges;
+	private double[] opChanges;
 	private double[] dataChanges;
 	private double[] versionsPerYear;
 	private double[] maintainancePerVersion;
-	double[] versionsId;
+	private double[] versionsId;
 	private double[] year;
+	private double[] SFuturePerVersion;
 	
 	public Workspace(String title,ArrayList<Version> version){
 		this.title = title;
@@ -37,6 +38,7 @@ public class Workspace {
 		dataChanges=new double[versions.size()];
 		maintainancePerVersion=new double[versions.size()];
 		versionsId=new double[versions.size()];
+		SFuturePerVersion=new double[getNumOfVersions()];
 	}
 	
 	public void initialize(){
@@ -48,6 +50,7 @@ public class Workspace {
 		this.computeRateOfWork();
 		this.calculateMaintainance();
 		this.calculateVersionsPerYear();
+		this.computeFormulaPerVerion();
 	}
 	
 	public Law getLaw(int index){
@@ -127,7 +130,7 @@ public class Workspace {
 		 * size=versions.size()
 		 */
 		float[] tempArray=new float[versions.size()];
-		ArrayList<Integer> tempList=new ArrayList();
+		ArrayList<Integer> tempList=new ArrayList<Integer>();
 		for(int i=0;i<versions.size();i++){
 			if(!tempList.contains(versions.get(i).getYear())){
 				yearCounter=1;
@@ -145,6 +148,44 @@ public class Workspace {
 		}
 	}
 	
+	private double computeE(ArrayList<Integer> SCurrents,
+			int SVersion,int pos){
+		double E=1,sum=0;
+		if(pos!=0){
+			for(int i=1;i<pos;i++){
+				sum+=1/(SCurrents.get(i)^2);
+			}
+			if(sum==0)
+				sum=1;
+			E=((SVersion-SCurrents.get(0))/sum);
+		}
+		return E;
+	}
+	
+	private double computeFormula(int size){
+		double avgE=0,sumE=0;
+		double SFuture;
+		ArrayList<Integer>SCurrents=new ArrayList<Integer>();
+		for(int i=0;i<size;i++){
+			SCurrents.add(getVersion(i).getNumOfOperations());
+		}
+		for(int i=1;i<size;i++){
+			sumE+=computeE(SCurrents,SCurrents.get(i),i);
+		}
+		if(size!=0){
+			avgE=sumE/size;
+		}
+		SFuture=SCurrents.get(size-1)+
+				(avgE/(SCurrents.get(size-1)^2));
+		return SFuture;
+		
+	}
+	
+	private void computeFormulaPerVerion(){
+		for(int i=0;i<SFuturePerVersion.length;i++){
+			SFuturePerVersion[i]=computeFormula(i+1);
+		}
+	}
 	public String checkIfLawsEvaluated(){
 		String message="";
 		int lawNumber=0;
@@ -175,8 +216,8 @@ public class Workspace {
 		labelY[2]="Chart label 3 Y";
 		String[] labelX=new String[2];
 		labelX[0]="Versions Id";
-		labelX[1]="Year";
-		labelX[2]="Chart label 3 X";
+		labelX[1]="Version Id";
+		labelX[2]="Year";
 		//TODO String laber gia to 3o charts?
 		ArrayList<double[]> valuesX=new ArrayList();
 		ArrayList<double[]> valuesY=new ArrayList();
@@ -184,9 +225,9 @@ public class Workspace {
 		valuesY.add(dataChanges);
 		valuesY.add(versionsPerYear);
 		valuesX.add(versionsId);
+		valuesX.add(versionsId);
 		valuesX.add(year);
 		//TODO EDW den exei values x ia to 3o chart?
-		valuesX.add(year);
 		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,3));
 		
 	}
@@ -286,7 +327,19 @@ public class Workspace {
 	}
 	
 	public void setUpLaw8(){
-		//TODO LAW 8
+		ArrayList<ChartType> chartType=new ArrayList();
+		chartType.add(ChartType.CHART_LINES);
+		String[] labelY=new String[1];
+		labelY[0]="Number of Operations";
+		String[] labelX= new String[1];
+		labelX[0]="Version Id";
+		ArrayList<double[]> valuesX=new ArrayList();
+		ArrayList<double[]> valuesY=new ArrayList();
+		valuesX.add(versionsId);
+		valuesY.add(SFuturePerVersion);
+		valuesY.add(opPerVersion);
+		laws.add(7,new Law("Law 8",labelX,labelY,chartType,valuesX,valuesY,1));
+		
 	}
 	
 	public double[] getOpComplexities(){
