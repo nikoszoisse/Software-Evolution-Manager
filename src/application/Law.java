@@ -15,7 +15,6 @@ public class Law {
 	
 	public Law(String name,String[] labelX, String[] labelY,ArrayList<ChartType> chartTypes,
 			ArrayList<double[]> valuesX,ArrayList<double[]> valuesY,int num_of_charts) {
-		super();
 		this.name = name;
 		this.labelX = labelX;
 		this.labelY = labelY;

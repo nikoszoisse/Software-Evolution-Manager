@@ -92,9 +92,8 @@ public class ViewEngine implements ActionListener{
 	}
 	
 	public void viewLaw(int law_num){
-		if(law_num == 0){
-			law_num++;
-		}
+		law_num--;
+		
 		String tab_type = this.tabbedPane.getSelectedComponent().getClass().getName();
 		
 		/*Check if History file selected*/
