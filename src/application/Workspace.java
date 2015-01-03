@@ -226,7 +226,7 @@ public class Workspace {
 		labelY[0]="number of Changes";
 		labelY[1]="number of Versions";
 		labelY[2]="Chart label 3 Y";
-		String[] labelX=new String[2];
+		String[] labelX=new String[3];
 		labelX[0]="Versions Id";
 		labelX[1]="Version Id";
 		labelX[2]="Year";
