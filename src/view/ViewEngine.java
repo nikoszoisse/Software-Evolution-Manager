@@ -263,6 +263,19 @@ public class ViewEngine implements ActionListener{
 		frmProjectSem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.initMenuBar();
 		this.initializeTabPane();
+		
+        new FileDrop( System.out, frmProjectSem.getContentPane(), new FileDrop.Listener()
+        {   public void filesDropped( java.io.File[] files )
+            {   for( int i = 0; i < files.length; i++ )
+                {   try
+                    {
+    				app.parseFileProcedure(files[i].toPath());
+                    }
+                    catch (InterruptedException e) {}
+                }   // end for: through each dropped file
+            }   // end filesDropped
+        }); // end FileDrop.Listener
+        
 		this.frmProjectSem.setVisible(true);
 	}
 
