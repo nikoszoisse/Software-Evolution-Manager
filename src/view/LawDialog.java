@@ -111,7 +111,7 @@ public class LawDialog extends JDialog implements ActionListener{
 	    /*SET UP Charts if exists*/
 	    if(law.getNum_of_charts() > 0)
 	    	setUpCharts();
-	    //TODO Remove them
+	    /*TODO Remove them
 	    DefaultXYDataset data_set = new DefaultXYDataset();
 		 double data[][] = {{1,2,3,4},{3,4,5,6}};
 		 data_set.addSeries("Sieries not null", data);
@@ -129,8 +129,7 @@ public class LawDialog extends JDialog implements ActionListener{
 		this.chartPane.add(chart_panel);
 		this.chartPane.add(chart_panel_1);
 		this.chartPane.add(chart_panel_2);
-		//TODO TILL HERE DELETE
-	    
+	    */
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -173,7 +172,8 @@ public class LawDialog extends JDialog implements ActionListener{
 	private JFreeChart newBarChart(int i) {
 		DefaultXYDataset data_set = new DefaultXYDataset();
 		 double data[][] = {law.getChartValuesX(i),law.getChartValuesY(i)};
-		 data_set.addSeries("", data);
+		 
+		data_set.addSeries("", data);
 		 
 		IntervalXYDataset dataset = new XYBarDataset(data_set, 1.0);
 		
