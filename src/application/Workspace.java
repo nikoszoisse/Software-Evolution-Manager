@@ -19,8 +19,8 @@ public class Workspace {
 	private double[] versionsPerYear;
 	private double[] maintainancePerVersion;
 	private double[] versionsId;
-	private double[] year;
 	private double[] SFuturePerVersion;
+	private double[] versionsYear;
 	
 	public Workspace(String title,ArrayList<Version> version){
 		this.title = title;
@@ -143,6 +143,7 @@ public class Workspace {
 		 * size=versions.size()
 		 */
 		float[] tempArray=new float[versions.size()];
+
 		ArrayList<Integer> tempList=new ArrayList<Integer>();
 		for(int i=0;i<versions.size();i++){
 			if(!tempList.contains(versions.get(i).getYear())){
@@ -155,10 +156,14 @@ public class Workspace {
 			}
 			tempArray[currPos]=yearCounter;
 		}
+		
 		versionsPerYear=new double[currPos+1];
+		versionsYear = new double[currPos+1];
 		for(int i=0;i<=currPos;i++){
 			versionsPerYear[i]=tempArray[i];
+			versionsYear[i] = tempList.get(i);
 		}
+		
 	}
 	
 	private double computeE(ArrayList<Integer> SCurrents,
@@ -232,12 +237,12 @@ public class Workspace {
 		labelX[2]="Year";
 		ArrayList<double[]> valuesX=new ArrayList<double[]>();
 		ArrayList<double[]> valuesY=new ArrayList<double[]>();
+		valuesX.add(versionsId);
+		valuesX.add(versionsId);
+		valuesX.add(versionsYear);
 		valuesY.add(opChanges);
 		valuesY.add(dataChanges);
 		valuesY.add(versionsPerYear);
-		valuesX.add(versionsId);
-		valuesX.add(versionsId);
-		valuesX.add(year);
 		laws.add(0,new Law("Law 1",labelX,labelY,chartType,valuesX,valuesY,3));
 		
 	}
@@ -351,8 +356,9 @@ public class Workspace {
 	private void setUpLaw8(){
 		ArrayList<ChartType> chartType=new ArrayList<ChartType>();
 		chartType.add(ChartType.CHART_LINES);
-		String[] labelY=new String[1];
-		labelY[0]="Number of Operations";
+		String[] labelY=new String[2];
+		labelY[0]="Estimated Operations";
+		labelY[1]="Number of Operations";
 		String[] labelX= new String[1];
 		labelX[0]="Version Id";
 		ArrayList<double[]> valuesX=new ArrayList<double[]>();

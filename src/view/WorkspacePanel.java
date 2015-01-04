@@ -22,10 +22,10 @@ public class WorkspacePanel extends JPanel {
 		this.workspace = workspace;
 		setLayout(new FlowLayout(FlowLayout.CENTER, 900, 30));
 		
-		JLabel label = new JLabel("Όνομα αρχείου: "+workspace.getTitle());
+		JLabel label = new JLabel("File name: "+workspace.getTitle());
 		add(label);
 		
-		JLabel label_1 = new JLabel("Αρ. Εκδόσεων: "+workspace.getNumOfVersions());
+		JLabel label_1 = new JLabel("Num. of versions: "+workspace.getNumOfVersions());
 		add(label_1);
 		
 		Label guide_step = new Label("Start by Evaluating the Laws on Menu->\"Tools->Evaluate Laws\"");
@@ -35,6 +35,7 @@ public class WorkspacePanel extends JPanel {
 		add(lblEvaluatedLawsX);
 		
 		this.progressBar = new JProgressBar();
+		progressBar.setToolTipText("Num. of evaluated laws.");
 		progressBar.setStringPainted(true);
 		add(progressBar);
 		progressBar.setForeground(Color.RED);

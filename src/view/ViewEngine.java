@@ -99,6 +99,7 @@ public class ViewEngine implements ActionListener{
 		/*Check if History file selected*/
 		if(tab_type != "view.WorkspacePanel"){
 			this.showErrorDialog("Evaluating a law requires 'Open/Select' a valid 'History File' first!");
+			return;
 		}
 		//TODO Check if returns the referce of the panel or shits 
 		WorkspacePanel current_tab = (WorkspacePanel) this.tabbedPane.getSelectedComponent();
