@@ -7,6 +7,7 @@ import javax.swing.JProgressBar;
 import application.Workspace;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Label;
 import java.awt.FlowLayout;
 
@@ -15,6 +16,7 @@ public class WorkspacePanel extends JPanel {
 	private JProgressBar progressBar;
 	private JLabel lblEvaluatedLawsX;
 	private Workspace workspace;
+	private Component success_message;
 	/**
 	 * Create the panel.
 	 */
@@ -40,6 +42,12 @@ public class WorkspacePanel extends JPanel {
 		add(progressBar);
 		progressBar.setForeground(Color.RED);
 		progressBar.setMaximum(8);
+		
+		success_message = new Label("You can create Report File!");
+		success_message.setForeground(new Color(0, 128, 0));
+		success_message.setBounds(265, 257, 173, 23);
+		success_message.setVisible(false);
+		add(success_message);
 	}
 	
 	public void updatePanel(){
@@ -49,10 +57,7 @@ public class WorkspacePanel extends JPanel {
 		
 		if(evaluated_laws == 8){
 			this.progressBar.setForeground(Color.GREEN);
-			Label success_message = new Label("You can create Report File!");
-			success_message.setForeground(new Color(0, 128, 0));
-			success_message.setBounds(265, 257, 173, 23);
-			add(success_message);
+			this.success_message.setVisible(true);
 		}
 	}
 	
