@@ -263,7 +263,7 @@ public class ViewEngine implements ActionListener{
 		frmProjectSem.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.initMenuBar();
 		this.initializeTabPane();
-		
+		//Enable and Handl drag and drop
         new FileDrop( System.out, frmProjectSem.getContentPane(), new FileDrop.Listener()
         {   public void filesDropped( java.io.File[] files )
             {   for( int i = 0; i < files.length; i++ )
