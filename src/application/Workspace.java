@@ -206,17 +206,21 @@ public class Workspace {
 	}
 	public String checkIfLawsEvaluated(){
 		String message="";
-		int lawNumber=0;
+		int lawNumber[]=new int[8];
 		boolean lawEvaluation=true;
 		for(int i=0;i<laws.size();i++){
 			if(!laws.get(i).checkLaw()){
-				lawNumber=i+1;
+				lawNumber[i]=i+1;
 				lawEvaluation=false;
-				break;
 			}
 		}
 		if(!lawEvaluation){
-			message="Law "+lawNumber+" has not evaluated";
+			String lawNumbers="";
+			for(int i=0;i<lawNumber.length;i++){
+				if(lawNumber[i]!=0)
+					lawNumbers+=" "+lawNumber[i];
+			}
+			message="Law "+lawNumbers+" has/have not evaluated";
 		}
 		
 		return message;
