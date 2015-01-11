@@ -1,5 +1,6 @@
 ﻿package application;
 
+
 public class Version {
 	private String softwareName,date;
 	private int initOp,initData,operationsNumber,dataStructuresNumber,id;
@@ -56,7 +57,15 @@ public class Version {
 	}
 	
 	public void computeRateOfWork(Version prevVersion){
-		int timePassed=1/*Den exei vrethei akoma lush */;
+		int timePassed;
+		int dayDifference=this.day-prevVersion.getDay();
+		int monthDifference=this.month-prevVersion.getMonth();
+		int yearDifference=this.year-prevVersion.getYear();
+		if(dayDifference<0)
+			dayDifference=-dayDifference;
+		if(monthDifference<0)
+			monthDifference=-monthDifference;
+		timePassed=dayDifference+2*monthDifference+3*yearDifference;
 		
 		opRateOfWork=(opAdded+opDeleted+opUpdated)/timePassed;
 		dataStructuresRateOfWork=(dataStructuresAdded+dataStructuresDeleted
