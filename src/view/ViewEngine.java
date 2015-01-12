@@ -69,7 +69,7 @@ public class ViewEngine implements ActionListener{
 	        "TxT History Files", "txt");
 	    chooser.setFileFilter(filter);
 	    
-		int returnVal = chooser.showOpenDialog(null);
+		int returnVal = chooser.showOpenDialog(this.frmProjectSem);
 		
 	    if(returnVal == JFileChooser.APPROVE_OPTION) {
 	    	//Tell to AppManager to handle the file and parse it!
@@ -88,7 +88,21 @@ public class ViewEngine implements ActionListener{
 	}
 	
 	public void createReportFileDialog(){
+		final JFileChooser chooser = new JFileChooser();
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+	        "TxT History Files", "txt");
+	    chooser.setFileFilter(filter);
+	    
+		int returnVal = chooser.showSaveDialog(this.frmProjectSem);
 		
+	    if(returnVal == JFileChooser.APPROVE_OPTION) {
+	    	Path file_path = chooser.getSelectedFile().toPath();
+			WorkspacePanel workspace_p = (WorkspacePanel)this.tabbedPane.getSelectedComponent();
+			app.reportProcedure(file_path, workspace_p.getWorkspace());
+	    	
+	       System.out.println(" You chose to open this file: " +
+	            chooser.getSelectedFile().getName());
+	    }
 	}
 	
 	public void viewLaw(int law_num){

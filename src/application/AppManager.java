@@ -43,13 +43,13 @@ public class AppManager {
 	 * Creates report File in save_file_path if all laws evaluated
 	 * @param save_file_path,workspace 
 	 */
-	public void reportProcedure(String save_file_path,Workspace workspace){
+	public void reportProcedure(Path save_file_path,Workspace workspace){
 		String error = workspace.checkIfLawsEvaluated();
 		if( error != null){
-			//TODO All Ok report it dam
+		    history_report.createReport(save_file_path, workspace);
 		}
 		else{
-			this.view_engine.showErrorDialog(error);
+		    this.view_engine.showErrorDialog(error);
 		}
 	}
 	
