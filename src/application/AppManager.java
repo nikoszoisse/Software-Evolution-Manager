@@ -45,7 +45,7 @@ public class AppManager {
 	 */
 	public void reportProcedure(Path save_file_path,Workspace workspace){
 		String error = workspace.checkIfLawsEvaluated();
-		if( error != null){
+		if (error == null){
 		    history_report.createReport(save_file_path, workspace);
 		}
 		else{
